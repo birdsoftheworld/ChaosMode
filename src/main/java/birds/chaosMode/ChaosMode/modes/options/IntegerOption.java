@@ -1,13 +1,6 @@
 package birds.chaosMode.ChaosMode.modes.options;
 
 public class IntegerOption extends ConfigurableOption {
-    public int getDefaultValue() {
-        return defaultValue;
-    }
-
-    public void setDefaultValue(int defaultValue) {
-        this.defaultValue = defaultValue;
-    }
 
     public int getMaximumValue() {
         return maximumValue;
@@ -33,7 +26,6 @@ public class IntegerOption extends ConfigurableOption {
         this.value = value;
     }
 
-    private int defaultValue;
     private int maximumValue;
     private int minimumValue;
 
