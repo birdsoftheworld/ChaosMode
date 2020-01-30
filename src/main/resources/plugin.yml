@@ -1,0 +1,6 @@
+name: ChaosMode
+version: 1.0.0
+main: birds.chaosMode.ChaosMode.ChaosMode
+commands:
+  chaos:
+    usage: /chaos
