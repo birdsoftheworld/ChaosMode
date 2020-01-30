@@ -1,5 +1,6 @@
 package birds.chaosMode.ChaosMode.modes.chaosModes;
 
+import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.ListenerMode;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
@@ -12,6 +13,10 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.Objects;
 
 public class MoonGravity extends ListenerMode {
+
+    public MoonGravity(ChaosMode chaosMode) {
+        super(chaosMode);
+    }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {

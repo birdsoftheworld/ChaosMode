@@ -5,11 +5,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ChaosMode extends JavaPlugin {
 
-    MoonGravity moonGravity;
+    private MoonGravity moonGravity;
 
     @Override
     public void onEnable() {
-        moonGravity = new MoonGravity();
+        moonGravity = new MoonGravity(this);
 
         getServer().getPluginManager().registerEvents(moonGravity, this);
     }
