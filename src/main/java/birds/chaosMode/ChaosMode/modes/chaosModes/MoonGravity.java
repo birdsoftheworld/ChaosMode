@@ -11,8 +11,10 @@ public class MoonGravity extends ListenerMode {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (event.getFrom().getBlockY() != event.getTo().getBlockY()) {
-            event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 10, 1));
+        if (event.getTo().getBlockY() > event.getFrom().getBlockY()) {
+            event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 1, 1));
+        } else if (event.getTo().getBlockY() < event.getFrom().getBlockY()) {
+            event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1, 1));
         }
     }
 }
