@@ -10,7 +10,5 @@ public class ChaosMode extends JavaPlugin {
     @Override
     public void onEnable() {
         moonGravity = new MoonGravity(this);
-
-        getServer().getPluginManager().registerEvents(moonGravity, this);
     }
 }
