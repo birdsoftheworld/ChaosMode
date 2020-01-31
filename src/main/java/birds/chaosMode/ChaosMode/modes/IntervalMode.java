@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 public class IntervalMode extends Mode {
 
-    private IntegerOption interval;
+    private IntegerOption interval = new IntegerOption();
     TaskRunner taskRunner = new TaskRunner();
     ChaosMode chaosMode;
 
@@ -17,8 +17,18 @@ public class IntervalMode extends Mode {
         this.chaosMode = chaosMode;
     }
 
+    public void intervalFunction() {
+        Bukkit.getLogger().info("Does the thing.");
+    }
+
     public void runInterval() {
-        taskRunner.runTaskTimer(chaosMode, this.getInterval(), 0);
+        BukkitRunnable runnable = new BukkitRunnable() {
+            @Override
+            public void run() {
+                intervalFunction();
+            }
+        };
+        runnable.runTaskTimer(chaosMode, 0, this.getInterval());
     }
 
     public int getInterval() {

@@ -32,8 +32,6 @@ public class MoonGravity extends ListenerMode {
         effectDuration.setMaximumValue(Integer.MAX_VALUE);
         effectDuration.setIcon(Material.POTION);
         this.setName("MoonGravity");
-        IntervalMode intervalMode = new IntervalMode(chaosMode);
-        intervalMode.setInterval(10);
     }
 
 
