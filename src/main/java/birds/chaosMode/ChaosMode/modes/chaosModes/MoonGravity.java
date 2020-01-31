@@ -1,6 +1,7 @@
 package birds.chaosMode.ChaosMode.modes.chaosModes;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
+import birds.chaosMode.ChaosMode.modes.IntervalMode;
 import birds.chaosMode.ChaosMode.modes.ListenerMode;
 import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
@@ -31,7 +32,11 @@ public class MoonGravity extends ListenerMode {
         effectDuration.setMaximumValue(Integer.MAX_VALUE);
         effectDuration.setIcon(Material.POTION);
         this.setName("MoonGravity");
+        IntervalMode intervalMode = new IntervalMode(chaosMode);
+        intervalMode.setInterval(10);
     }
+
+
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
@@ -47,11 +52,11 @@ public class MoonGravity extends ListenerMode {
 
     @EventHandler
     public void onJump(PlayerStatisticIncrementEvent event) {
-        if(!isEnabled()) return;
+        if (!isEnabled()) return;
         Player player = event.getPlayer();
 
         // only continue if action is a jump
-        if(!(event.getStatistic().equals(Statistic.JUMP))) {
+        if (!(event.getStatistic().equals(Statistic.JUMP))) {
             return;
         }
 
