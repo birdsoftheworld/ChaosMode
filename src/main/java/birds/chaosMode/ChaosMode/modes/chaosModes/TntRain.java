@@ -16,7 +16,7 @@ public class TntRain extends IntervalMode {
     @Override
     public void enable() {
         super.enable();
-        runInterval();
+        startInterval();
     }
 
     @Override

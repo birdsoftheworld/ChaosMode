@@ -2,10 +2,7 @@ package birds.chaosMode.ChaosMode.modes;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
-import javafx.concurrent.Task;
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
 
 public abstract class IntervalMode extends Mode {
 
@@ -16,23 +13,25 @@ public abstract class IntervalMode extends Mode {
     public IntervalMode(ChaosMode chaosMode, String name) {
         super(name);
         this.chaosMode = chaosMode;
+        runnable = null;
+    }
+
+    public abstract void intervalFunction();
+
+    public void startInterval() {
         runnable = new BukkitRunnable() {
             @Override
             public void run() {
                 intervalFunction();
             }
         };
-    }
-
-    public abstract void intervalFunction();
-
-    public void runInterval() {
         runnable.runTaskTimer(chaosMode, 0, this.getInterval());
     }
 
     public void stopInterval() {
-        if (!runnable.isCancelled()) {
+        if (runnable != null && !runnable.isCancelled()) {
             runnable.cancel();
+            runnable = null;
         }
     }
 
@@ -42,5 +41,9 @@ public abstract class IntervalMode extends Mode {
 
     public void setInterval(int value) {
         this.interval.setValue(value);
+        if (runnable != null) {
+            stopInterval();
+            startInterval();
+        }
     }
 }
