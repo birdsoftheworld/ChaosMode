@@ -16,30 +16,25 @@ public abstract class IntervalMode extends Mode {
         runnable = null;
     }
 
-    public abstract void intervalFunction();
+    public abstract BukkitRunnable getRunnable();
 
-    public void startInterval() {
-        runnable = new BukkitRunnable() {
-            @Override
-            public void run() {
-                intervalFunction();
-            }
-        };
+    protected void startInterval() {
+        runnable = getRunnable();
         runnable.runTaskTimer(chaosMode, 0, this.getInterval());
     }
 
-    public void stopInterval() {
+    protected void stopInterval() {
         if (runnable != null && !runnable.isCancelled()) {
             runnable.cancel();
             runnable = null;
         }
     }
 
-    public int getInterval() {
+    private int getInterval() {
         return interval.getValue();
     }
 
-    public void setInterval(int value) {
+    protected void setInterval(int value) {
         this.interval.setValue(value);
         if (runnable != null) {
             stopInterval();

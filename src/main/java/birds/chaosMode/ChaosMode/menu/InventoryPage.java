@@ -15,9 +15,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class InventoryPage implements InventoryHolder, Listener {
+public abstract class InventoryPage implements InventoryHolder, Listener {
     Inventory page;
-    ChaosMode chaosMode;
+    protected ChaosMode chaosMode;
 
     InventoryPage(ChaosMode chaosMode) {
         this.chaosMode = chaosMode;
@@ -44,9 +44,7 @@ public class InventoryPage implements InventoryHolder, Listener {
         runSlotAction(slot, item, player);
     }
 
-    public void runSlotAction(int slot, ItemStack item, Player player) {
-        // to be overridden
-    }
+    public abstract void runSlotAction(int slot, ItemStack item, Player player);
 
     public void showInventory(Player player) {
         // open the inventory
@@ -56,6 +54,7 @@ public class InventoryPage implements InventoryHolder, Listener {
     public ItemStack createGuiItem(Material material, String name, String...lore) {
         ItemStack item = new ItemStack(material, 1);
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(name);
 
         ArrayList<String> metaLore = new ArrayList<String>(Arrays.asList(lore));
