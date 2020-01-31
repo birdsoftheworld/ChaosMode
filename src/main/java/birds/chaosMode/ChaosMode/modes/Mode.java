@@ -6,13 +6,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Mode {
 
     private ItemStack icon;
     private boolean enabled;
+    private String name;
 
-    Mode() {
+    public Mode() {
         this.enabled = false;
     }
 
@@ -26,6 +28,18 @@ public class Mode {
 
     public void disable() {
         this.enabled = false;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        if (this.name != null) {
+            return this.name;
+        } else {
+            return "This mode doesn't have a name!";
+        }
     }
 
     public void setIcon(Material material, String name, String...lore) {

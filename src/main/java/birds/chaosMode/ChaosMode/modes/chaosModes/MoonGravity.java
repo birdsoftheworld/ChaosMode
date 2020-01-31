@@ -30,6 +30,7 @@ public class MoonGravity extends ListenerMode {
         effectDuration.setMinimumValue(1);
         effectDuration.setMaximumValue(Integer.MAX_VALUE);
         effectDuration.setIcon(Material.POTION);
+        this.setName("MoonGravity");
     }
 
     @EventHandler

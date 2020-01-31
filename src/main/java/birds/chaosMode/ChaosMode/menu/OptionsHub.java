@@ -30,8 +30,10 @@ public class OptionsHub extends InventoryPage {
         Mode currentMode = modes[slot];
         if(currentMode.isEnabled()) {
             currentMode.disable();
+            player.sendMessage("Disabled " + currentMode.getName());
         } else {
             currentMode.enable();
+            player.sendMessage("Enabled " + currentMode.getName());
         }
     }
 }

@@ -1,6 +1,7 @@
 package birds.chaosMode.ChaosMode.modes;
 
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
+import org.bukkit.Bukkit;
 
 public class IntervalMode extends Mode {
     public int getInterval() {
