@@ -16,18 +16,6 @@ public class TntRain extends IntervalMode {
     }
 
     @Override
-    public void enable() {
-        super.enable();
-        startInterval();
-    }
-
-    @Override
-    public void disable() {
-        super.disable();
-        stopInterval();
-    }
-
-    @Override
     public void intervalFunction() {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             onlinePlayer.getWorld().spawnEntity(onlinePlayer.getLocation().add(0.0, 10.0, 0.0), EntityType.PRIMED_TNT);

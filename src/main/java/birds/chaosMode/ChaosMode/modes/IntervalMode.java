@@ -18,6 +18,18 @@ public abstract class IntervalMode extends Mode {
 
     public abstract void intervalFunction();
 
+    @Override
+    public void enable() {
+        super.enable();
+        startInterval();
+    }
+
+    @Override
+    public void disable() {
+        super.disable();
+        stopInterval();
+    }
+
     public void startInterval() {
         runnable = new BukkitRunnable() {
             @Override
