@@ -14,8 +14,9 @@ public class Mode {
     private boolean enabled;
     private String name;
 
-    public Mode() {
+    public Mode(String name) {
         this.enabled = false;
+        this.name = name;
     }
 
     public boolean isEnabled() {

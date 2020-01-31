@@ -5,7 +5,8 @@ import org.bukkit.event.Listener;
 
 public class ListenerMode extends Mode implements Listener {
 
-    public ListenerMode(ChaosMode chaosMode) {
+    public ListenerMode(ChaosMode chaosMode, String name) {
+        super(name);
         chaosMode.getServer().getPluginManager().registerEvents(this, chaosMode);
     }
 }

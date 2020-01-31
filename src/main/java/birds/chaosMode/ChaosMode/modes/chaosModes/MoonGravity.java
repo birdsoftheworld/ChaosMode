@@ -24,14 +24,13 @@ public class MoonGravity extends ListenerMode {
     private ConfigurableOption[] options;
 
     public MoonGravity(ChaosMode chaosMode) {
-        super(chaosMode);
-        setIcon(Material.SLIME_BLOCK, ChatColor.RESET.toString() + "Gravity Mode", "Click to activation");
+        super(chaosMode, "MoonGravity");
         effectDuration = new IntegerOption();
         effectDuration.setValue(20);
         effectDuration.setMinimumValue(1);
         effectDuration.setMaximumValue(Integer.MAX_VALUE);
         effectDuration.setIcon(Material.POTION);
-        this.setName("MoonGravity");
+        setIcon(Material.SLIME_BLOCK, ChatColor.RESET.toString() + getName(), "Click to activation");
     }
 
 
