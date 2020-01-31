@@ -5,6 +5,8 @@ import birds.chaosMode.ChaosMode.modes.IntervalMode;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 
 public class TntRain extends IntervalMode {
     public TntRain(ChaosMode chaosMode) {
@@ -27,6 +29,9 @@ public class TntRain extends IntervalMode {
 
     @Override
     public void intervalFunction() {
-        Bukkit.getLogger().info("Does a different thing!");
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            onlinePlayer.getWorld().spawnEntity(onlinePlayer.getLocation().add(0.0, 10.0, 0.0), EntityType.PRIMED_TNT);
+            Bukkit.getLogger().info("Spawned TNT on player " + onlinePlayer.getName());
+        }
     }
 }
