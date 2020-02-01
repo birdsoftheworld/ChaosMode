@@ -22,16 +22,17 @@ public class SettingsPage extends InventoryPage {
     private Mode mode;
     private OptionsHub hub;
 
-    SettingsPage(ChaosMode chaosMode, Mode mode) {
+    SettingsPage(ChaosMode chaosMode, Mode mode, OptionsHub hub) {
         super(chaosMode);
-        options = mode.getOptions();
+        this.options = mode.getOptions();
         this.mode = mode;
+        this.hub = hub; // for exiting the menu
         setUpSlots();
     }
 
     @Override
     public void runSlotAction(int slot, ItemStack item, Player player, ClickType click) {
-        // ignore doubleclicks
+        // ignore double-clicks
         if(click.equals(ClickType.DOUBLE_CLICK)) return;
         if(item.getType().equals(Material.GREEN_STAINED_GLASS_PANE)) {
             // xp sound
@@ -53,7 +54,6 @@ public class SettingsPage extends InventoryPage {
             player.openInventory(page);
         } else if(item.getType().equals(Material.IRON_INGOT)) {
             player.closeInventory();
-            hub = new OptionsHub(chaosMode);
             hub.showInventory(player);
         }
     }

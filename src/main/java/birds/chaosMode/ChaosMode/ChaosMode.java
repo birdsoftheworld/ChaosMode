@@ -2,7 +2,6 @@ package birds.chaosMode.ChaosMode;
 
 import birds.chaosMode.ChaosMode.commands.ChaosCommand;
 import birds.chaosMode.ChaosMode.modes.Mode;
-import birds.chaosMode.ChaosMode.modes.chaosModes.BlockToBedrock;
 import birds.chaosMode.ChaosMode.modes.chaosModes.MoonGravity;
 import birds.chaosMode.ChaosMode.modes.chaosModes.TntDrop;
 import org.bukkit.plugin.java.JavaPlugin;
