@@ -7,9 +7,12 @@ import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
@@ -26,27 +29,57 @@ public class SettingsPage extends InventoryPage {
     }
 
     @Override
-    public void runSlotAction(int slot, ItemStack item, Player player) {
-
+    public void runSlotAction(int slot, ItemStack item, Player player, ClickType click) {
+        // ignore doubleclicks
+        if(click.equals(ClickType.DOUBLE_CLICK)) return;
+        if(item.getType().equals(Material.GREEN_STAINED_GLASS_PANE)) {
+            // xp sound
+            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
+            ConfigurableOption selected = options.get((slot - 3) / 9);
+            if(selected instanceof IntegerOption)
+                ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() + 1);
+            // redisplay dialog
+            setUpSlots();
+            player.openInventory(page);
+        } else if(item.getType().equals(Material.RED_STAINED_GLASS_PANE)) {
+            // xp sound
+            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
+            ConfigurableOption selected = options.get((slot - 5) / 9);
+            if(selected instanceof IntegerOption)
+                ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 1);
+            // redisplay dialog
+            setUpSlots();
+            player.openInventory(page);
+        } else if(item.getType().equals(Material.IRON_INGOT)) {
+            player.closeInventory();
+        }
     }
 
     @Override
     public void setUpSlots() {
         // create a new inventory with 1 line per setting
-        page = Bukkit.createInventory(this, 9 * options.size(), mode.getName() + " Settings");
-        ItemStack[] contents = new ItemStack[9 * options.size()];
+        page = Bukkit.createInventory(this, 9 * options.size() + 9, mode.getName() + " Settings");
+        ItemStack[] contents = new ItemStack[9 * options.size() + 9];
 
         int iterator = 0;
         for(ConfigurableOption option : options) {
             if(option instanceof IntegerOption) {
                 // on click: add 1
-                contents[iterator + 3] = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "-1");
+                if(((IntegerOption) option).getValue() > ((IntegerOption) option).getMinimumValue())
+                    contents[iterator + 3] = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "-1");
                 // on click: reset to default
-                contents[iterator + 4] = option.getIcon();
+                ItemStack optionIcon = option.getIcon();
+                ItemMeta optionMeta = optionIcon.getItemMeta();
+                optionMeta.setDisplayName(ChatColor.RESET.toString() + ((IntegerOption) option).getValue());
+                optionIcon.setItemMeta(optionMeta);
+                contents[iterator + 4] = optionIcon;
                 // on click: subtract 1
-                contents[iterator + 5] = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "+1");
+                if(((IntegerOption) option).getValue() < ((IntegerOption) option).getMaximumValue())
+                    contents[iterator + 5] = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "+1");
             }
             iterator += 9;
+            if(iterator == 9 * options.size())
+                contents[iterator + 4] = createGuiItem(Material.IRON_INGOT, ChatColor.RESET.toString() + "Exit");
         }
 
         page.setContents(contents);

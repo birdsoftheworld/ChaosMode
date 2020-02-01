@@ -15,7 +15,7 @@ public abstract class IntervalMode extends Mode {
 
     public IntervalMode(ChaosMode chaosMode, String name) {
         super(name);
-        interval.setIcon(Material.CLOCK, ChatColor.RESET.toString() + "Interval (ticks)");
+        interval.setIcon(Material.CLOCK, ChatColor.RESET.toString() + "Interval (ticks)", ChatColor.RESET.toString() + "Interval (ticks)");
         interval.setChangeEvent(new IntChangeEvent() {
             @Override
             public void change(int oldValue, int newValue) {

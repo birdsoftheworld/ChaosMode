@@ -39,12 +39,13 @@ public abstract class InventoryPage implements InventoryHolder, Listener {
         if (event.getClick().equals(ClickType.NUMBER_KEY)) {
             event.setCancelled(true); // cancel number
         }
+
         event.setCancelled(true); // cancel item pickup
 
-        runSlotAction(slot, item, player);
+        runSlotAction(slot, item, player, event.getClick());
     }
 
-    public abstract void runSlotAction(int slot, ItemStack item, Player player);
+    public abstract void runSlotAction(int slot, ItemStack item, Player player, ClickType click);
     public abstract void setUpSlots();
 
     public void showInventory(Player player) {

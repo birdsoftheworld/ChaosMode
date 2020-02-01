@@ -4,8 +4,9 @@ import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.Mode;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
 public class OptionsHub extends InventoryPage {
@@ -18,17 +19,19 @@ public class OptionsHub extends InventoryPage {
     }
 
     @Override
-    public void runSlotAction(int slot, ItemStack item, Player player) {
+    public void runSlotAction(int slot, ItemStack item, Player player, ClickType click) {
 
         if (item.getType().equals(Material.GREEN_STAINED_GLASS_PANE)) {
             // disable corresponding mode if mode is enabled
             modes[slot - 9].disable();
             setUpSlots();
+            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
             player.openInventory(page);
         } else if (item.getType().equals(Material.RED_STAINED_GLASS_PANE)) {
             // enable corresponding mode if mode is enabled
             modes[slot - 9].enable();
             setUpSlots();
+            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
             player.openInventory(page);
         } else {
             // otherwise, go into settings
