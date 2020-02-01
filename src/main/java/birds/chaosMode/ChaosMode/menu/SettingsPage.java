@@ -88,6 +88,9 @@ public class SettingsPage extends InventoryPage {
                 selected = options.get((slot - 3) / 9);
                 if (selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getDefaultValue());
+                // redisplay dialog
+                setUpSlots();
+                player.openInventory(page);
                 break;
         }
     }
