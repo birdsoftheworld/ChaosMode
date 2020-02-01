@@ -18,13 +18,13 @@ import java.util.Random;
 
 public class Corruption extends IntervalMode {
     private IntegerOption radius = new IntegerOption(16, 1, Integer.MAX_VALUE);
-    private IntegerOption biasTowardsSpecial = new IntegerOption(2, 0, 100);
+    private IntegerOption biasTowardsSpecial = new IntegerOption(4, 0, 100);
     private IntegerOption entityChance = new IntegerOption(25, 0, 100);
     private Random random = new Random();
     private Usables usables;
 
     public Corruption(ChaosMode chaosMode, Usables usables) {
-        super(chaosMode, "BlockCorruption");
+        super(chaosMode, "Corruption");
         this.usables = usables;
 
         radius.setIcon(Material.STONE, "Radius", "Radius");
