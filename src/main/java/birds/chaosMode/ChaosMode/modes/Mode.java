@@ -1,5 +1,6 @@
 package birds.chaosMode.ChaosMode.modes;
 
+import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -10,6 +11,7 @@ import java.util.Objects;
 
 public class Mode {
 
+    private ArrayList<ConfigurableOption> options = new ArrayList<>();
     private ItemStack icon;
     private boolean enabled;
     private String name;
@@ -43,7 +45,7 @@ public class Mode {
         }
     }
 
-    protected void setIcon(Material material, String name, String... lore) {
+    public void setIcon(Material material, String name, String... lore) {
         ItemStack item = new ItemStack(material, 1);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
@@ -59,5 +61,13 @@ public class Mode {
 
     public ItemStack getIcon() {
         return icon;
+    }
+
+    public void addOption(ConfigurableOption option) {
+        options.add(option);
+    }
+
+    public ArrayList<ConfigurableOption> getOptions() {
+        return options;
     }
 }

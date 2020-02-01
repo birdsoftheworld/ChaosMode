@@ -23,11 +23,33 @@ public class IntegerOption extends ConfigurableOption {
     }
 
     public void setValue(int value) {
+        changeEvent.change(this.value, value);
         this.value = value;
+    }
+
+    public void setChangeEvent(IntChangeEvent changeEvent) {
+        this.changeEvent = changeEvent;
+    }
+
+    public int getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(int defaultValue) {
+        this.defaultValue = defaultValue;
     }
 
     private int maximumValue;
     private int minimumValue;
-
+    private int defaultValue;
     private int value;
+
+    private IntChangeEvent changeEvent;
+
+    public IntegerOption(int defaultValue, int minimumValue, int maximumValue) {
+        this.value = defaultValue;
+        this.defaultValue = defaultValue;
+        this.minimumValue = minimumValue;
+        this.maximumValue = maximumValue;
+    }
 }
