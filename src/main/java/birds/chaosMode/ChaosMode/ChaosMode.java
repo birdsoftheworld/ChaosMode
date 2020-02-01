@@ -7,19 +7,22 @@ import birds.chaosMode.ChaosMode.modes.chaosModes.MoonGravity;
 import birds.chaosMode.ChaosMode.modes.chaosModes.TntDrop;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChaosMode extends JavaPlugin {
 
-    public Mode[] getModes() {
+    public List<Mode> getModes() {
         return modes;
     }
 
-    private Mode[] modes;
+    private List<Mode> modes;
 
     @Override
     public void onEnable() {
-        modes = new Mode[3];
-        modes[0] = new MoonGravity(this);
-        modes[1] = new TntDrop(this);
+        modes = new ArrayList<>();
+        modes.add(new MoonGravity(this));
+        modes.add(new TntDrop(this));
         this.getCommand("chaos").setExecutor(new ChaosCommand(this)); // open menu hub
     }
 }

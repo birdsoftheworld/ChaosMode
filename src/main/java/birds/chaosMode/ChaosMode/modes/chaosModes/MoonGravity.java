@@ -7,6 +7,7 @@ import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -57,5 +58,6 @@ public class MoonGravity extends ListenerMode {
 
         int duration = effectDuration.getValue();
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, duration, 1));
+        player.spawnParticle(Particle.CLOUD, player.getLocation(), 25);
     }
 }
