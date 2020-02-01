@@ -16,21 +16,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MoonGravity extends ListenerMode {
 
     private IntegerOption effectDuration;
-    private ConfigurableOption[] options;
 
     public MoonGravity(ChaosMode chaosMode) {
         super(chaosMode, "MoonGravity");
-        effectDuration = new IntegerOption();
-        effectDuration.setValue(20);
-        effectDuration.setMinimumValue(1);
-        effectDuration.setMaximumValue(Integer.MAX_VALUE);
-        effectDuration.setIcon(Material.POTION);
-        setIcon(Material.SLIME_BLOCK, ChatColor.RESET.toString() + getName(), "Click to activation");
+        effectDuration = new IntegerOption(20, 1, Integer.MAX_VALUE);
+        effectDuration.setIcon(Material.POTION, "Moon Gravity");
+        setIcon(Material.SLIME_BLOCK, ChatColor.RESET.toString() + getName(), "Click to change settings");
+        addOption(effectDuration);
     }
 
 

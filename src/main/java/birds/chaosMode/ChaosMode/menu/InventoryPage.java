@@ -45,13 +45,14 @@ public abstract class InventoryPage implements InventoryHolder, Listener {
     }
 
     public abstract void runSlotAction(int slot, ItemStack item, Player player);
+    public abstract void setUpSlots();
 
     public void showInventory(Player player) {
         // open the inventory
         player.openInventory(page);
     }
 
-    public ItemStack createGuiItem(Material material, String name, String...lore) {
+    ItemStack createGuiItem(Material material, String name, String... lore) {
         ItemStack item = new ItemStack(material, 1);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
