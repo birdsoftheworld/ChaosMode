@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class OptionsHub extends InventoryPage {
     private Mode[] modes;
+    private int size;
 
     public OptionsHub(ChaosMode chaosMode) {
         super(chaosMode);
@@ -20,26 +21,35 @@ public class OptionsHub extends InventoryPage {
 
     @Override
     public void runSlotAction(int slot, ItemStack item, Player player, ClickType click) {
+        if(slot >= size) return;
 
-        if (item.getType().equals(Material.GREEN_STAINED_GLASS_PANE)) {
-            // disable corresponding mode if mode is enabled
-            modes[slot - 9].disable();
-            setUpSlots();
-            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
-            player.openInventory(page);
-        } else if (item.getType().equals(Material.RED_STAINED_GLASS_PANE)) {
-            // enable corresponding mode if mode is enabled
-            modes[slot - 9].enable();
-            setUpSlots();
-            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
-            player.openInventory(page);
-        } else {
-            // otherwise, go into settings
-            Mode currentMode = modes[slot];
+        switch(item.getType()) {
+            case GREEN_STAINED_GLASS_PANE:
+                // disable corresponding mode if mode is enabled
+                modes[slot - 9].disable();
+                setUpSlots();
+                // xp sound
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
+                player.openInventory(page);
+                break;
 
-            SettingsPage settings = new SettingsPage(chaosMode, currentMode, this);
-            player.closeInventory();
-            settings.showInventory(player);
+            case RED_STAINED_GLASS_PANE:
+                // enable corresponding mode if mode is enabled
+                modes[slot - 9].enable();
+                setUpSlots();
+                // xp sound
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
+                player.openInventory(page);
+                break;
+
+            default:
+                // otherwise, go into settings
+                Mode currentMode = modes[slot];
+
+                SettingsPage settings = new SettingsPage(chaosMode, currentMode, this);
+                player.closeInventory();
+                settings.showInventory(player);
+                break;
         }
     }
 
@@ -47,6 +57,7 @@ public class OptionsHub extends InventoryPage {
     public void setUpSlots() {
         // set size to 2 lines per 9 modes
         int size = 18 * ((modes.length - 1) / 9 + 1);
+        this.size = size;
         page = Bukkit.createInventory(this, size, "Options");
         ItemStack[] items = new ItemStack[18];
 

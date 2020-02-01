@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -34,13 +35,13 @@ public class BlockCorruption extends IntervalMode {
     public BlockCorruption(ChaosMode chaosMode) {
         super(chaosMode, "BlockCorruption");
         random = new Random();
-        radius = new IntegerOption(7, 1, Integer.MAX_VALUE);
+        radius = new IntegerOption(16, 1, Integer.MAX_VALUE);
         radius.setIcon(Material.STONE, "Radius", "Radius");
         addOption(radius);
-        interval.setValue(10);
-        interval.setDefaultValue(10);
+        interval.setValue(40);
+        interval.setDefaultValue(40);
         setIcon(Material.SPONGE, ChatColor.RESET.toString() + getName(), "Click to change settings");
-        this.setInterval(10);
+        this.setInterval(40);
 
         discoverBlocks();
     }
