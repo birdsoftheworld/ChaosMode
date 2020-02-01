@@ -20,6 +20,7 @@ public class SettingsPage extends InventoryPage {
     private ArrayList<ConfigurableOption> options;
     private Inventory page;
     private Mode mode;
+    private OptionsHub hub;
 
     SettingsPage(ChaosMode chaosMode, Mode mode) {
         super(chaosMode);
@@ -52,6 +53,8 @@ public class SettingsPage extends InventoryPage {
             player.openInventory(page);
         } else if(item.getType().equals(Material.IRON_INGOT)) {
             player.closeInventory();
+            hub = new OptionsHub(chaosMode);
+            hub.showInventory(player);
         }
     }
 
