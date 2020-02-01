@@ -24,10 +24,12 @@ public class OptionsHub extends InventoryPage {
             // disable corresponding mode if mode is enabled
             modes[slot - 9].disable();
             setUpSlots();
+            player.openInventory(page);
         } else if (item.getType().equals(Material.RED_STAINED_GLASS_PANE)) {
             // enable corresponding mode if mode is enabled
             modes[slot - 9].enable();
             setUpSlots();
+            player.openInventory(page);
         } else {
             // otherwise, go into settings
             Mode currentMode = modes[slot];

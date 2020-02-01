@@ -7,7 +7,6 @@ import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -49,6 +48,15 @@ public class SettingsPage extends InventoryPage {
             }
             iterator += 9;
         }
+
         page.setContents(contents);
+    }
+
+
+    // not overriding this method somehow causes a NullPointerException when calling player.openInventory. do not remove
+    @Override
+    public void showInventory(Player player) {
+        // open the inventory
+        player.openInventory(page);
     }
 }
