@@ -114,6 +114,7 @@ public class SettingsPage extends InventoryPage {
                 // on click: reset to default
                 ItemStack optionIcon = option.getIcon();
                 ItemMeta optionMeta = optionIcon.getItemMeta();
+                assert optionMeta != null;
                 optionMeta.setDisplayName(ChatColor.RESET.toString() + ((IntegerOption) option).getValue());
                 optionIcon.setItemMeta(optionMeta);
                 contents[iterator + 4] = optionIcon;

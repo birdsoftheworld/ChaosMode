@@ -8,7 +8,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -50,7 +49,7 @@ public class BlockCorruption extends IntervalMode {
         return random.nextInt((higherBound - lowerBound) + 1) + lowerBound;
     }
 
-    public Material getUsableBlock() {
+    private Material getUsableBlock() {
         return usableBlocks.get(randInt(0, usableBlocks.size() - 1));
     }
 

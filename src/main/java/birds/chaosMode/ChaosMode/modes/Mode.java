@@ -16,7 +16,7 @@ public class Mode {
     private boolean enabled;
     private String name;
 
-    public Mode(String name) {
+    Mode(String name) {
         this.enabled = false;
         this.name = name;
     }
@@ -45,7 +45,7 @@ public class Mode {
         }
     }
 
-    public void setIcon(Material material, String name, String... lore) {
+    protected void setIcon(Material material, String name, String... lore) {
         ItemStack item = new ItemStack(material, 1);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
@@ -63,7 +63,7 @@ public class Mode {
         return icon;
     }
 
-    public void addOption(ConfigurableOption option) {
+    protected void addOption(ConfigurableOption option) {
         options.add(option);
     }
 
