@@ -3,6 +3,7 @@ package birds.chaosMode.ChaosMode.menu;
 import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.Mode;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,10 +31,10 @@ public class OptionsHub extends InventoryPage {
         Mode currentMode = modes[slot];
         if(currentMode.isEnabled()) {
             currentMode.disable();
-            player.sendMessage("Disabled " + currentMode.getName());
+            player.sendMessage(ChatColor.GOLD.toString() + "Disabled " + currentMode.getName() + ChatColor.RESET.toString());
         } else {
             currentMode.enable();
-            player.sendMessage("Enabled " + currentMode.getName());
+            player.sendMessage(ChatColor.GOLD.toString() + "Enabled " + currentMode.getName() + ChatColor.RESET.toString());
         }
     }
 }
