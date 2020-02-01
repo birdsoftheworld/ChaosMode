@@ -2,6 +2,7 @@ package birds.chaosMode.ChaosMode.menu;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.Mode;
+import birds.chaosMode.ChaosMode.modes.options.BooleanOption;
 import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.Bukkit;
@@ -47,6 +48,8 @@ public class SettingsPage extends InventoryPage {
                 selected = options.get((slot - 1) / 9);
                 if(selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 20);
+                if(selected instanceof BooleanOption)
+                    ((BooleanOption) selected).setValue(false);
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -74,6 +77,26 @@ public class SettingsPage extends InventoryPage {
                 selected = options.get((slot - 5) / 9);
                 if (selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() + 20);
+                if(selected instanceof BooleanOption)
+                    ((BooleanOption) selected).setValue(true);
+                // redisplay dialog
+                setUpSlots();
+                player.openInventory(page);
+                break;
+
+            case WHITE_STAINED_GLASS_PANE:
+                selected = options.get((slot + 1) / 9);
+                if (selected instanceof IntegerOption)
+                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getMinimumValue());
+                // redisplay dialog
+                setUpSlots();
+                player.openInventory(page);
+                break;
+
+            case BLACK_STAINED_GLASS_PANE:
+                selected = options.get((slot - 7) / 9);
+                if (selected instanceof IntegerOption)
+                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getMaximumValue());
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -88,6 +111,8 @@ public class SettingsPage extends InventoryPage {
                 selected = options.get((slot - 3) / 9);
                 if (selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getDefaultValue());
+                if (selected instanceof BooleanOption)
+                    ((BooleanOption) selected).setValue(((BooleanOption) selected).getDefaultValue());
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -104,27 +129,52 @@ public class SettingsPage extends InventoryPage {
 
         int iterator = 0;
         for(ConfigurableOption option : options) {
+            // on click: reset to default
+            ItemStack optionIcon = option.getIcon();
+            ItemMeta optionMeta = optionIcon.getItemMeta();
             if(option instanceof IntegerOption) {
+                // on click: set to minimum value
+                contents[iterator] = createGuiItem(Material.WHITE_STAINED_GLASS_PANE, ChatColor.RESET.toString() + "Set to Minimum Value");
+
                 // on click: subtract 20
                 if(((IntegerOption) option).getValue() - 20 >= ((IntegerOption) option).getMinimumValue())
                     contents[iterator + 2] = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "-20");
+
                 // on click: subtract 1
                 if(((IntegerOption) option).getValue() > ((IntegerOption) option).getMinimumValue())
                     contents[iterator + 3] = createGuiItem(Material.PINK_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "-1");
-                // on click: reset to default
-                ItemStack optionIcon = option.getIcon();
-                ItemMeta optionMeta = optionIcon.getItemMeta();
+
                 assert optionMeta != null;
                 optionMeta.setDisplayName(ChatColor.RESET.toString() + ((IntegerOption) option).getValue());
-                optionIcon.setItemMeta(optionMeta);
-                contents[iterator + 4] = optionIcon;
+
                 // on click: add 1
                 if(((IntegerOption) option).getValue() < ((IntegerOption) option).getMaximumValue())
                     contents[iterator + 5] = createGuiItem(Material.LIME_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "+1");
+
                 // on click: add 20
                 if(((IntegerOption) option).getValue() + 20 <= ((IntegerOption) option).getMaximumValue())
                     contents[iterator + 6] = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "+20");
+
+                // on click: set to minimum value
+                if(((IntegerOption) option).getMaximumValue() != Integer.MAX_VALUE)
+                    contents[iterator + 8] = createGuiItem(Material.BLACK_STAINED_GLASS_PANE, ChatColor.RESET.toString() + "Set to Maximum Value");
             }
+            if(option instanceof BooleanOption) {
+                // on click: disable
+                if(((BooleanOption) option).getValue())
+                    contents[iterator + 3] = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "Disable");
+
+                assert optionMeta != null;
+                optionMeta.setDisplayName(ChatColor.RESET.toString() + ((BooleanOption) option).getValue());
+
+                // on click: enable
+                if(!((BooleanOption) option).getValue())
+                    contents[iterator + 5] = createGuiItem(Material.LIME_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "Enable");
+
+            }
+            optionIcon.setItemMeta(optionMeta);
+            contents[iterator + 4] = optionIcon;
+
             iterator += 9;
             if(iterator == 9 * options.size())
                 contents[iterator + 4] = createGuiItem(Material.IRON_INGOT, ChatColor.RESET.toString() + "Exit");

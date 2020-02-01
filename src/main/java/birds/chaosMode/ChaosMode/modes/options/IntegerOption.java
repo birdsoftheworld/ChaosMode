@@ -55,4 +55,6 @@ public class IntegerOption extends ConfigurableOption {
         this.minimumValue = minimumValue;
         this.maximumValue = maximumValue;
     }
+
+    public IntegerOption() {}
 }

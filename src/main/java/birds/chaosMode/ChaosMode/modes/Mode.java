@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Mode {
+public abstract class Mode {
 
     private ArrayList<ConfigurableOption> options = new ArrayList<>();
     private ItemStack icon;
