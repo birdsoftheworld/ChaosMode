@@ -60,6 +60,6 @@ public class MoonGravity extends ListenerMode {
 
         int duration = effectDuration.getValue();
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, duration, 1));
-        player.spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 10);
+        player.spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 10, 31);
     }
 }

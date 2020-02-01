@@ -23,6 +23,7 @@ public class RaytraceTest extends IntervalMode {
 
             for (Entity nearbyEntity : onlinePlayer.getNearbyEntities(10.0, 10.0, 10.0)) {
                 RayTraceResult result = nearbyEntity.getBoundingBox().rayTrace(onlinePlayer.getLocation().toVector(), onlinePlayer.getEyeLocation().getDirection(), 10.0);
+                if (result == null) return;
                 Bukkit.getLogger().info(result.getHitEntity().getName().toString());
             }
         }
