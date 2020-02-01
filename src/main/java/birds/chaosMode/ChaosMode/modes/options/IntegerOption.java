@@ -23,12 +23,14 @@ public class IntegerOption extends ConfigurableOption {
     }
 
     public void setValue(int value) {
-        changeEvent.change(this.value, value);
+        if(isEvent)
+            changeEvent.change(this.value, value);
         this.value = value;
     }
 
     public void setChangeEvent(IntChangeEvent changeEvent) {
         this.changeEvent = changeEvent;
+        isEvent = true;
     }
 
     public int getDefaultValue() {
@@ -43,6 +45,7 @@ public class IntegerOption extends ConfigurableOption {
     private int minimumValue;
     private int defaultValue;
     private int value;
+    private boolean isEvent;
 
     private IntChangeEvent changeEvent;
 

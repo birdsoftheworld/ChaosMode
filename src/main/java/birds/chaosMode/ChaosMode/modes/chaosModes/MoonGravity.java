@@ -27,7 +27,7 @@ public class MoonGravity extends ListenerMode {
     public MoonGravity(ChaosMode chaosMode) {
         super(chaosMode, "MoonGravity");
         effectDuration = new IntegerOption(20, 1, Integer.MAX_VALUE);
-        effectDuration.setIcon(Material.POTION, "Moon Gravity");
+        effectDuration.setIcon(Material.POTION, ChatColor.RESET.toString() + "Potion Duration", "Potion Duration");
         setIcon(Material.SLIME_BLOCK, ChatColor.RESET.toString() + getName(), "Click to change settings");
         addOption(effectDuration);
     }
