@@ -23,18 +23,6 @@ public class TntDrop extends IntervalMode {
     }
 
     @Override
-    public void enable() {
-        super.enable();
-        startInterval();
-    }
-
-    @Override
-    public void disable() {
-        super.disable();
-        stopInterval();
-    }
-
-    @Override
     public BukkitRunnable getRunnable() {
         return new BukkitRunnable() {
             @Override

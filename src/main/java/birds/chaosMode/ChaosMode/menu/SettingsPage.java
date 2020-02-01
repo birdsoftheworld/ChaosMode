@@ -37,7 +37,7 @@ public class SettingsPage extends InventoryPage {
         if(item.getType().equals(Material.GREEN_STAINED_GLASS_PANE)) {
             // xp sound
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
-            ConfigurableOption selected = options.get((slot - 3) / 9);
+            ConfigurableOption selected = options.get((slot - 4) / 9);
             if(selected instanceof IntegerOption)
                 ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() + 1);
             // redisplay dialog
@@ -46,7 +46,7 @@ public class SettingsPage extends InventoryPage {
         } else if(item.getType().equals(Material.RED_STAINED_GLASS_PANE)) {
             // xp sound
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
-            ConfigurableOption selected = options.get((slot - 5) / 9);
+            ConfigurableOption selected = options.get((slot - 2) / 9);
             if(selected instanceof IntegerOption)
                 ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 1);
             // redisplay dialog

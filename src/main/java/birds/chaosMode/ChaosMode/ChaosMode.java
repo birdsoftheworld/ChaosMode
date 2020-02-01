@@ -2,6 +2,7 @@ package birds.chaosMode.ChaosMode;
 
 import birds.chaosMode.ChaosMode.commands.ChaosCommand;
 import birds.chaosMode.ChaosMode.modes.Mode;
+import birds.chaosMode.ChaosMode.modes.chaosModes.BlockCorruption;
 import birds.chaosMode.ChaosMode.modes.chaosModes.MoonGravity;
 import birds.chaosMode.ChaosMode.modes.chaosModes.TntDrop;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,9 +17,10 @@ public class ChaosMode extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        modes = new Mode[2];
+        modes = new Mode[3];
         modes[0] = new MoonGravity(this);
         modes[1] = new TntDrop(this);
+        modes[2] = new BlockCorruption(this);
         this.getCommand("chaos").setExecutor(new ChaosCommand(this)); // open menu hub
     }
 }
