@@ -1,6 +1,7 @@
 package birds.chaosMode.ChaosMode.menu;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
+import birds.chaosMode.ChaosMode.modes.IntervalMode;
 import birds.chaosMode.ChaosMode.modes.Mode;
 import birds.chaosMode.ChaosMode.modes.options.BooleanOption;
 import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
@@ -10,7 +11,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -86,11 +89,8 @@ public class SettingsPage extends InventoryPage {
 
             case WHITE_STAINED_GLASS_PANE:
                 selected = options.get((slot + 1) / 9);
-                if (selected instanceof IntegerOption) {
-                    // hack to fix weird cancelling issues where intervals will continue once cancelled
+                if (selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getMinimumValue());
-                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getMinimumValue());
-                }
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -98,11 +98,8 @@ public class SettingsPage extends InventoryPage {
 
             case BLACK_STAINED_GLASS_PANE:
                 selected = options.get((slot - 7) / 9);
-                if (selected instanceof IntegerOption) {
-                    // hack to fix weird cancelling issues where intervals will continue once cancelled
+                if (selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getMaximumValue());
-                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getMaximumValue());
-                }
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -111,15 +108,14 @@ public class SettingsPage extends InventoryPage {
             case IRON_INGOT:
                 player.closeInventory();
                 hub.showInventory(player);
+                if(mode instanceof IntervalMode)
+                    ((IntervalMode) mode).update();
                 break;
 
             default:
                 selected = options.get((slot - 3) / 9);
-                if (selected instanceof IntegerOption) {
-                    // hack to fix weird cancelling issues where intervals will continue once cancelled
+                if (selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getDefaultValue());
-                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getDefaultValue());
-                }
                 if (selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(((BooleanOption) selected).getDefaultValue());
                 // redisplay dialog
@@ -198,5 +194,13 @@ public class SettingsPage extends InventoryPage {
     public void showInventory(Player player) {
         // open the inventory
         player.openInventory(page);
+    }
+
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
+        if(!event.getInventory().equals(page)) return;
+
+        if(mode instanceof IntervalMode)
+            ((IntervalMode) mode).update();
     }
 }

@@ -1,7 +1,6 @@
 package birds.chaosMode.ChaosMode.modes;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
-import birds.chaosMode.ChaosMode.modes.options.IntChangeEvent;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -16,18 +15,16 @@ public abstract class IntervalMode extends Mode {
     public IntervalMode(ChaosMode chaosMode, String name) {
         super(name);
         interval.setIcon(Material.CLOCK, ChatColor.RESET.toString() + "Interval (ticks)", ChatColor.RESET.toString() + "Interval (ticks)");
-        interval.setChangeEvent(new IntChangeEvent() {
-            @Override
-            public void change(int oldValue, int newValue) {
-                if (runnable != null) {
-                    stopInterval();
-                    startInterval();
-                }
-            }
-        });
         this.chaosMode = chaosMode;
         runnable = null;
         addOption(interval);
+    }
+
+    public void update() {
+        if (runnable != null) {
+            stopInterval();
+            startInterval();
+        }
     }
 
     public abstract BukkitRunnable getRunnable();
