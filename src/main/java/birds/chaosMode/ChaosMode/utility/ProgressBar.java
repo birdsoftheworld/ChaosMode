@@ -1,17 +1,12 @@
-package birds.chaosMode.ChaosMode.modes;
+package birds.chaosMode.ChaosMode.utility;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.entity.Boss;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.List;
 
 public abstract class ProgressBar {
 
@@ -19,14 +14,13 @@ public abstract class ProgressBar {
     private BukkitRunnable runnable;
     private ChaosMode chaosMode;
 
-    public ProgressBar(ChaosMode chaosMode) {
+    protected ProgressBar(ChaosMode chaosMode) {
         this.chaosMode = chaosMode;
         runnable = null;
     }
 
     public BossBar getBar(String title, BarColor color, BarStyle style) {
-        BossBar bar = Bukkit.createBossBar(title, color, style);
-        return bar;
+        return Bukkit.createBossBar(title, color, style);
     }
 
     public abstract BukkitRunnable getRunnable();

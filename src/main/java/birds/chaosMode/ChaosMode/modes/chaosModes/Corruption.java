@@ -1,7 +1,7 @@
 package birds.chaosMode.ChaosMode.modes.chaosModes;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
-import birds.chaosMode.ChaosMode.Usables;
+import birds.chaosMode.ChaosMode.utility.Usables;
 import birds.chaosMode.ChaosMode.modes.IntervalMode;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.Bukkit;

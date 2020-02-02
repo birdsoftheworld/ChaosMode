@@ -1,4 +1,4 @@
-package birds.chaosMode.ChaosMode;
+package birds.chaosMode.ChaosMode.utility;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

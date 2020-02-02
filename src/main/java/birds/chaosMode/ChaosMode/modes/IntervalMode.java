@@ -3,6 +3,7 @@ package birds.chaosMode.ChaosMode.modes;
 import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.options.IntChangeEvent;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
+import birds.chaosMode.ChaosMode.utility.ProgressBar;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
