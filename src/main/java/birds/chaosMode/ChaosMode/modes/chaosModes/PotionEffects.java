@@ -14,12 +14,13 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class PotionEffects extends IntervalMode {
-    private Usables usables = new Usables();
+    private Usables usables;
     private BooleanOption includeWithering;
     private IntegerOption potionDuration;
 
-    public PotionEffects(ChaosMode chaosMode, String name) {
+    public PotionEffects(ChaosMode chaosMode, Usables usables) {
         super(chaosMode, "Potion Effects");
+        this.usables = usables;
 
         interval.setValue(40);
         interval.setDefaultValue(40);
