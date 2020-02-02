@@ -46,8 +46,10 @@ public class SettingsPage extends InventoryPage {
         switch(item.getType()) {
             case RED_STAINED_GLASS_PANE:
                 selected = options.get((slot - 1) / 9);
-                if(selected instanceof IntegerOption)
+                if(selected instanceof IntegerOption) {
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 20);
+                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 1);
+                }
                 if(selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(false);
                 // redisplay dialog
@@ -57,8 +59,9 @@ public class SettingsPage extends InventoryPage {
 
             case PINK_STAINED_GLASS_PANE:
                 selected = options.get((slot - 2) / 9);
-                if(selected instanceof IntegerOption)
+                if(selected instanceof IntegerOption) {
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 1);
+                }
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -66,8 +69,9 @@ public class SettingsPage extends InventoryPage {
 
             case LIME_STAINED_GLASS_PANE:
                 selected = options.get((slot - 4) / 9);
-                if (selected instanceof IntegerOption)
+                if (selected instanceof IntegerOption) {
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() + 1);
+                }
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -75,8 +79,9 @@ public class SettingsPage extends InventoryPage {
 
             case GREEN_STAINED_GLASS_PANE:
                 selected = options.get((slot - 5) / 9);
-                if (selected instanceof IntegerOption)
+                if (selected instanceof IntegerOption) {
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() + 20);
+                }
                 if(selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(true);
                 // redisplay dialog
@@ -86,8 +91,11 @@ public class SettingsPage extends InventoryPage {
 
             case WHITE_STAINED_GLASS_PANE:
                 selected = options.get((slot + 1) / 9);
-                if (selected instanceof IntegerOption)
+                if (selected instanceof IntegerOption) {
+                    // hack to fix weird cancelling issues where intervals will continue once cancelled
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getMinimumValue());
+                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getMinimumValue());
+                }
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -95,8 +103,11 @@ public class SettingsPage extends InventoryPage {
 
             case BLACK_STAINED_GLASS_PANE:
                 selected = options.get((slot - 7) / 9);
-                if (selected instanceof IntegerOption)
+                if (selected instanceof IntegerOption) {
+                    // hack to fix weird cancelling issues where intervals will continue once cancelled
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getMaximumValue());
+                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getMaximumValue());
+                }
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -109,8 +120,11 @@ public class SettingsPage extends InventoryPage {
 
             default:
                 selected = options.get((slot - 3) / 9);
-                if (selected instanceof IntegerOption)
+                if (selected instanceof IntegerOption) {
+                    // hack to fix weird cancelling issues where intervals will continue once cancelled
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getDefaultValue());
+                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getDefaultValue());
+                }
                 if (selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(((BooleanOption) selected).getDefaultValue());
                 // redisplay dialog
