@@ -20,6 +20,8 @@ public class EternalNight extends ListenerMode {
 
         moreDifficult.setIcon(Material.CREEPER_HEAD, ChatColor.RESET.toString() + "Harder Difficulty");
         addOption(moreDifficult);
+
+        setIcon(Material.DAYLIGHT_DETECTOR, ChatColor.RESET.toString() + getName(), "Click to change settings");
     }
 
     @EventHandler
