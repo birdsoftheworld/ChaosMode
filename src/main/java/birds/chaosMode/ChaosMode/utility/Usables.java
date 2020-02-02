@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.loot.LootTable;
 import org.bukkit.loot.LootTables;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +15,7 @@ public class Usables {
     private ArrayList<Material> usableBlocks;
     private ArrayList<EntityType> usableEntities;
     private ArrayList<LootTables> usableLootTables;
+    private ArrayList<PotionEffectType> usablePotionEffects;
 
     private Random random;
 
@@ -23,6 +25,7 @@ public class Usables {
         discoverBlocks();
         discoverEntities();
         discoverLootTables();
+        discoverPotionEffects();
     }
 
     private int randInt(int lowerBound, int higherBound) {
@@ -44,7 +47,7 @@ public class Usables {
     private void discoverEntities() {
         Bukkit.getLogger().info("Starting entity discovery...");
         usableEntities = new ArrayList<>();
-        // get all blocks
+        // get all entities
         for(EntityType type : EntityType.values()) {
             // don't include weird types or bosses
             if(type.equals(EntityType.PLAYER)) continue;
@@ -70,9 +73,22 @@ public class Usables {
     private void discoverLootTables() {
         Bukkit.getLogger().info("Starting LootTable discovery...");
         usableLootTables = new ArrayList<>();
-        // get all blocks
+        // get all loottables
         usableLootTables.addAll(Arrays.asList(LootTables.values()));
         Bukkit.getLogger().info("Discovered " + usableLootTables.size() + " LootTables!");
+    }
+
+    private void discoverPotionEffects() {
+        Bukkit.getLogger().info("Starting effect discovery...");
+        usableBlocks = new ArrayList<>();
+        // get all effects
+        for(PotionEffectType effect : PotionEffectType.values()) {
+            // don't include instant potion effects, which do weird things when applied for a long time
+            if(effect.equals(PotionEffectType.HARM) || effect.equals(PotionEffectType.HEAL)) continue;
+            usablePotionEffects.add(effect);
+        }
+        usablePotionEffects.addAll(Arrays.asList(PotionEffectType.values()));
+        Bukkit.getLogger().info("Discovered " + usablePotionEffects.size() + " effects!");
     }
 
     public LootTable getUsableLootTable() {
@@ -85,5 +101,9 @@ public class Usables {
 
     public EntityType getUsableEntity() {
         return usableEntities.get(randInt(0, usableEntities.size() - 1));
+    }
+
+    public PotionEffectType getUsablePotionEffect() {
+        return usablePotionEffects.get(randInt(0, usablePotionEffects.size() - 1));
     }
 }
