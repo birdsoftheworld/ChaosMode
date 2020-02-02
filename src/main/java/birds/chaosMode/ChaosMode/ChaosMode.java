@@ -27,4 +27,11 @@ public class ChaosMode extends JavaPlugin {
         modes.add(new EternalNight(this));
         this.getCommand("chaos").setExecutor(new ChaosCommand(this)); // open menu hub
     }
+
+    @Override
+    public void onDisable() {
+        for(Mode mode : modes) {
+            mode.disable();
+        }
+    }
 }
