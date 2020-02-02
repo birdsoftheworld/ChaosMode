@@ -1,111 +1,49 @@
 package birds.chaosMode.ChaosMode.modes;
 
+import birds.chaosMode.ChaosMode.ChaosMode;
+import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
+import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.entity.Boss;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public class ProgressBar {
-    public BossBar getBar() {
-        BossBar cooldown = new BossBar() {
-            @Override
-            public String getTitle() {
-                return null;
-            }
+public abstract class ProgressBar {
 
-            @Override
-            public void setTitle(String s) {
+    private ProgressBar progressBar;
+    private BukkitRunnable runnable;
+    private ChaosMode chaosMode;
 
-            }
+    public ProgressBar(ChaosMode chaosMode) {
+        this.chaosMode = chaosMode;
+        runnable = null;
+    }
 
-            @Override
-            public BarColor getColor() {
-                return null;
-            }
+    public BossBar getBar(String title, BarColor color, BarStyle style) {
+        BossBar bar = Bukkit.createBossBar(title, color, style);
+        return bar;
+    }
 
-            @Override
-            public void setColor(BarColor barColor) {
+    public abstract BukkitRunnable getRunnable();
 
-            }
+    public void startInterval(ChaosMode chaosMode, IntegerOption interval) {
+        runnable = getRunnable();
+        runnable.runTaskTimer(chaosMode, 0, 5);
+    }
 
-            @Override
-            public BarStyle getStyle() {
-                return null;
-            }
+    public void stopInterval() {
+        if (runnable != null && !runnable.isCancelled()) {
+            runnable.cancel();
+            runnable = null;
+        }
+    }
 
-            @Override
-            public void setStyle(BarStyle barStyle) {
-
-            }
-
-            @Override
-            public void removeFlag(BarFlag barFlag) {
-
-            }
-
-            @Override
-            public void addFlag(BarFlag barFlag) {
-
-            }
-
-            @Override
-            public boolean hasFlag(BarFlag barFlag) {
-                return false;
-            }
-
-            @Override
-            public void setProgress(double v) {
-
-            }
-
-            @Override
-            public double getProgress() {
-                return 0;
-            }
-
-            @Override
-            public void addPlayer(Player player) {
-
-            }
-
-            @Override
-            public void removePlayer(Player player) {
-
-            }
-
-            @Override
-            public void removeAll() {
-
-            }
-
-            @Override
-            public List<Player> getPlayers() {
-                return null;
-            }
-
-            @Override
-            public void setVisible(boolean b) {
-
-            }
-
-            @Override
-            public boolean isVisible() {
-                return false;
-            }
-
-            @Override
-            public void show() {
-
-            }
-
-            @Override
-            public void hide() {
-
-            }
-        };
-        return cooldown;
+    public void incrementBar(BossBar bar, int increment) {
+        bar.setProgress(bar.getProgress() + increment);
     }
 }
