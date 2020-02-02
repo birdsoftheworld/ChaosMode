@@ -79,6 +79,8 @@ public class SettingsPage extends InventoryPage {
                 selected = options.get((slot - 4) / 9);
                 if (selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() + 1);
+                if(selected instanceof BooleanOption)
+                    ((BooleanOption) selected).setValue(true);
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -95,8 +97,6 @@ public class SettingsPage extends InventoryPage {
                     if(integerSelected.getValue() > integerSelected.getMaximumValue())
                         integerSelected.setValue(integerSelected.getMaximumValue());
                 }
-                if(selected instanceof BooleanOption)
-                    ((BooleanOption) selected).setValue(true);
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -165,7 +165,9 @@ public class SettingsPage extends InventoryPage {
                     contents[iterator + 3] = createGuiItem(Material.PINK_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "-1");
 
                 assert optionMeta != null;
-                optionMeta.setDisplayName(ChatColor.RESET.toString() + ((IntegerOption) option).getValue());
+                ArrayList<String> lores = new ArrayList<>();
+                lores.add(Integer.toString(((IntegerOption) option).getValue()));
+                optionMeta.setLore(lores);
 
                 // on click: add 1
                 if(((IntegerOption) option).getValue() < ((IntegerOption) option).getMaximumValue())
@@ -185,7 +187,9 @@ public class SettingsPage extends InventoryPage {
                     contents[iterator + 3] = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "Disable");
 
                 assert optionMeta != null;
-                optionMeta.setDisplayName(ChatColor.RESET.toString() + ((BooleanOption) option).getValue());
+                ArrayList<String> lores = new ArrayList<>();
+                lores.add(Boolean.toString(((BooleanOption) option).getValue()));
+                optionMeta.setLore(lores);
 
                 // on click: enable
                 if(!((BooleanOption) option).getValue())

@@ -84,7 +84,8 @@ public class Usables {
         // get all effects
         for(PotionEffectType effect : PotionEffectType.values()) {
             // don't include instant potion effects, which do weird things when applied for a long time
-            if(effect.equals(PotionEffectType.HARM) || effect.equals(PotionEffectType.HEAL)) continue;
+            if(effect.equals(PotionEffectType.HARM)) continue;
+            if(effect.equals(PotionEffectType.HEAL)) continue;
             usablePotionEffects.add(effect);
         }
         usablePotionEffects.addAll(Arrays.asList(PotionEffectType.values()));
