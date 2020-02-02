@@ -46,11 +46,19 @@ public class SettingsPage extends InventoryPage {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
 
         ConfigurableOption selected;
+        boolean isShift = click.equals(ClickType.SHIFT_LEFT) || click.equals(ClickType.SHIFT_RIGHT);
         switch(item.getType()) {
             case RED_STAINED_GLASS_PANE:
                 selected = options.get((slot - 1) / 9);
-                if(selected instanceof IntegerOption)
-                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 20);
+                if(selected instanceof IntegerOption) {
+                    IntegerOption integerSelected = (IntegerOption) selected;
+                    if(isShift)
+                        integerSelected.setValue(integerSelected.getValue() - 100);
+                    else
+                        integerSelected.setValue(integerSelected.getValue() - 20);
+                    if(integerSelected.getValue() < integerSelected.getMinimumValue())
+                        integerSelected.setValue(integerSelected.getMinimumValue());
+                }
                 if(selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(false);
                 // redisplay dialog
@@ -78,8 +86,15 @@ public class SettingsPage extends InventoryPage {
 
             case GREEN_STAINED_GLASS_PANE:
                 selected = options.get((slot - 5) / 9);
-                if (selected instanceof IntegerOption)
-                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() + 20);
+                if(selected instanceof IntegerOption) {
+                    IntegerOption integerSelected = (IntegerOption) selected;
+                    if(isShift)
+                        integerSelected.setValue(integerSelected.getValue() + 100);
+                    else
+                        integerSelected.setValue(integerSelected.getValue() + 20);
+                    if(integerSelected.getValue() > integerSelected.getMaximumValue())
+                        integerSelected.setValue(integerSelected.getMaximumValue());
+                }
                 if(selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(true);
                 // redisplay dialog
@@ -143,7 +158,7 @@ public class SettingsPage extends InventoryPage {
 
                 // on click: subtract 20
                 if(((IntegerOption) option).getValue() - 20 >= ((IntegerOption) option).getMinimumValue())
-                    contents[iterator + 2] = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "-20");
+                    contents[iterator + 2] = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "-20", "Hold shift to subtract 100");
 
                 // on click: subtract 1
                 if(((IntegerOption) option).getValue() > ((IntegerOption) option).getMinimumValue())
@@ -158,7 +173,7 @@ public class SettingsPage extends InventoryPage {
 
                 // on click: add 20
                 if(((IntegerOption) option).getValue() + 20 <= ((IntegerOption) option).getMaximumValue())
-                    contents[iterator + 6] = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "+20");
+                    contents[iterator + 6] = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "+20", "Hold shift to subtract 100");
 
                 // on click: set to maximum value
                 if(((IntegerOption) option).getMaximumValue() != Integer.MAX_VALUE)
@@ -189,7 +204,7 @@ public class SettingsPage extends InventoryPage {
     }
 
 
-    // not overriding this method somehow causes a NullPointerException when calling player.openInventory. do not remove
+    // not overriding this method somehow causes a NullPointerException when calling player.openInventory
     @Override
     public void showInventory(Player player) {
         // open the inventory
