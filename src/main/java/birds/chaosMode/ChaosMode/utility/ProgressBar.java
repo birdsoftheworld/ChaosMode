@@ -14,7 +14,7 @@ public class ProgressBar {
     private BossBar bossBar = Bukkit.createBossBar("Time Left", BarColor.RED, BarStyle.SOLID);
     private ChaosMode chaosMode;
 
-    protected ProgressBar(ChaosMode chaosMode) {
+    public ProgressBar(ChaosMode chaosMode) {
         this.chaosMode = chaosMode;
         runnable = null;
     }

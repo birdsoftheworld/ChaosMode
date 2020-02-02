@@ -32,12 +32,12 @@ public abstract class IntervalMode extends Mode {
 
     public abstract BukkitRunnable getRunnable();
 
-    private void startInterval() {
+    protected void startInterval() {
         runnable = getRunnable();
         runnable.runTaskTimer(chaosMode, 0, this.getInterval());
     }
 
-    private void stopInterval() {
+    protected void stopInterval() {
         if (runnable != null && !runnable.isCancelled()) {
             runnable.cancel();
             runnable = null;
