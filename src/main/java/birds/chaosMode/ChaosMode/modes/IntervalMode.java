@@ -8,7 +8,6 @@ import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.entity.Boss;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public abstract class IntervalMode extends Mode {
@@ -16,10 +15,26 @@ public abstract class IntervalMode extends Mode {
     protected IntegerOption interval = new IntegerOption(20, 1, Integer.MAX_VALUE);
     private ChaosMode chaosMode;
     private BukkitRunnable runnable;
-    public BossBar bossBar;
+    protected BossBar bossBar;
+    private ProgressBar cooldownBar;
 
     public IntervalMode(ChaosMode chaosMode, String name) {
         super(name);
+        cooldownBar = new ProgressBar(chaosMode) {
+            @Override
+            public BukkitRunnable getRunnable() {
+                return new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        if (bossBar.getProgress() + (1.0 / getInterval()) < 1) {
+                            bossBar.setProgress(bossBar.getProgress() + (1.0 / getInterval()));
+                        } else {
+                            bossBar.setProgress(0);
+                        }
+                    }
+                };
+            }
+        };
         final BossBar bossBar = cooldownBar.getBar(getName(), BarColor.RED, BarStyle.SOLID);
         interval.setIcon(Material.CLOCK, ChatColor.RESET.toString() + "Interval (ticks)", ChatColor.RESET.toString() + "Interval (ticks)");
         interval.setChangeEvent(new IntChangeEvent() {
@@ -36,22 +51,6 @@ public abstract class IntervalMode extends Mode {
         runnable = null;
         addOption(interval);
     }
-
-    private ProgressBar cooldownBar = new ProgressBar(chaosMode) {
-        @Override
-        public BukkitRunnable getRunnable() {
-            return new BukkitRunnable() {
-                @Override
-                public void run() {
-                    if (bossBar.getProgress() + (1.0 / getInterval()) < 1) {
-                        bossBar.setProgress(bossBar.getProgress() + (1.0 / getInterval()));
-                    } else {
-                        bossBar.setProgress(0);
-                    }
-                }
-            };
-        }
-    };
 
     public abstract BukkitRunnable getRunnable();
 
