@@ -80,7 +80,7 @@ public class Usables {
 
     private void discoverPotionEffects() {
         Bukkit.getLogger().info("Starting effect discovery...");
-        usableBlocks = new ArrayList<>();
+        usablePotionEffects = new ArrayList<>();
         // get all effects
         for(PotionEffectType effect : PotionEffectType.values()) {
             // don't include instant potion effects, which do weird things when applied for a long time
