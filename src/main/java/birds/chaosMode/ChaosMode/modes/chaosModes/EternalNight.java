@@ -15,8 +15,8 @@ public class EternalNight extends ListenerMode {
 
     private BooleanOption moreDifficult = new BooleanOption(true);
 
-    public EternalNight(ChaosMode chaosMode, String name) {
-        super(chaosMode, name);
+    public EternalNight(ChaosMode chaosMode) {
+        super(chaosMode, "Eternal Night");
 
         moreDifficult.setIcon(Material.CREEPER_HEAD, ChatColor.RESET.toString() + "Harder Difficulty");
         addOption(moreDifficult);
