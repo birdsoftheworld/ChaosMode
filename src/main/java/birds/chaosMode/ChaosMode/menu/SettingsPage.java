@@ -6,6 +6,7 @@ import birds.chaosMode.ChaosMode.modes.Mode;
 import birds.chaosMode.ChaosMode.modes.options.BooleanOption;
 import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
+import birds.chaosMode.ChaosMode.modes.options.ItemListOption;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 
 public class SettingsPage extends InventoryPage {
     private ArrayList<ConfigurableOption> options;
-    private Inventory page;
     private Mode mode;
     private OptionsHub hub;
     private int size;
@@ -37,7 +37,7 @@ public class SettingsPage extends InventoryPage {
 
     @Override
     public void runSlotAction(int slot, ItemStack item, Player player, ClickType click) {
-        if(slot >= size) return;
+        if(slot >= size - 1) return;
 
         // ignore double-clicks
         if(click.equals(ClickType.DOUBLE_CLICK)) return;
@@ -133,6 +133,14 @@ public class SettingsPage extends InventoryPage {
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getDefaultValue());
                 if (selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(((BooleanOption) selected).getDefaultValue());
+                if (selected instanceof ItemListOption) {
+                    ItemListPage listPage = new ItemListPage(chaosMode, (ItemListOption) selected, mode, this);
+
+                    player.closeInventory();
+                    listPage.showInventory(player);
+                    break;
+                }
+
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -196,6 +204,12 @@ public class SettingsPage extends InventoryPage {
                     contents[iterator + 5] = createGuiItem(Material.LIME_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "Enable");
 
             }
+            if(option instanceof ItemListOption) {
+                assert optionMeta != null;
+                ArrayList<String> lores = new ArrayList<>();
+                lores.add("Click to configure item list!");
+                optionMeta.setLore(lores);
+            }
             optionIcon.setItemMeta(optionMeta);
             contents[iterator + 4] = optionIcon;
 
@@ -205,14 +219,6 @@ public class SettingsPage extends InventoryPage {
         }
 
         page.setContents(contents);
-    }
-
-
-    // not overriding this method somehow causes a NullPointerException when calling player.openInventory
-    @Override
-    public void showInventory(Player player) {
-        // open the inventory
-        player.openInventory(page);
     }
 
     @EventHandler

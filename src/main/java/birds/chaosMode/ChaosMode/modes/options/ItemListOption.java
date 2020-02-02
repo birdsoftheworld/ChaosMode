@@ -6,8 +6,7 @@ import java.util.ArrayList;
 
 public class ItemListOption extends ConfigurableOption {
 
-    private ArrayList<Material> items = new ArrayList<>();
-    private ArrayList<Material> defaultValue = new ArrayList<>();
+    ArrayList<Material> items = new ArrayList<>();
 
     public ArrayList<Material> getItems() {
         return items;
@@ -23,5 +22,10 @@ public class ItemListOption extends ConfigurableOption {
 
     public void removeItem(Material item) {
         this.items.remove(item);
+    }
+
+    public boolean itemIsAcceptable(Material item) {
+        // return true unless duplicate
+        return !items.contains(item);
     }
 }
