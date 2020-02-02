@@ -23,21 +23,6 @@ public class TntDrop extends IntervalMode {
     }
 
     @Override
-    public void enable() {
-        super.enable();
-        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            bossBar.addPlayer(onlinePlayer);
-        }
-        bossBar.setVisible(true);
-    }
-
-    @Override
-    public void disable() {
-        super.disable();
-        bossBar.setVisible(false);
-    }
-
-    @Override
     public BukkitRunnable getRunnable() {
         return new BukkitRunnable() {
             @Override

@@ -46,9 +46,8 @@ public class SettingsPage extends InventoryPage {
         switch(item.getType()) {
             case RED_STAINED_GLASS_PANE:
                 selected = options.get((slot - 1) / 9);
-                if(selected instanceof IntegerOption) {
+                if(selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 20);
-                }
                 if(selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(false);
                 // redisplay dialog
@@ -58,9 +57,8 @@ public class SettingsPage extends InventoryPage {
 
             case PINK_STAINED_GLASS_PANE:
                 selected = options.get((slot - 2) / 9);
-                if(selected instanceof IntegerOption) {
+                if(selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 1);
-                }
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -68,9 +66,8 @@ public class SettingsPage extends InventoryPage {
 
             case LIME_STAINED_GLASS_PANE:
                 selected = options.get((slot - 4) / 9);
-                if (selected instanceof IntegerOption) {
+                if (selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() + 1);
-                }
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -78,9 +75,8 @@ public class SettingsPage extends InventoryPage {
 
             case GREEN_STAINED_GLASS_PANE:
                 selected = options.get((slot - 5) / 9);
-                if (selected instanceof IntegerOption) {
+                if (selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() + 20);
-                }
                 if(selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(true);
                 // redisplay dialog
