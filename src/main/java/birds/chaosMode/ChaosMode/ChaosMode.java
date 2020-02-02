@@ -25,13 +25,7 @@ public class ChaosMode extends JavaPlugin {
         modes.add(new Corruption(this, usables));
         modes.add(new PotionEffects(this, usables));
         modes.add(new EternalNight(this));
+        modes.add(new BlockCollapse(this));
         this.getCommand("chaos").setExecutor(new ChaosCommand(this)); // open menu hub
-    }
-
-    @Override
-    public void onDisable() {
-        for(Mode mode : modes) {
-            mode.disable();
-        }
     }
 }
