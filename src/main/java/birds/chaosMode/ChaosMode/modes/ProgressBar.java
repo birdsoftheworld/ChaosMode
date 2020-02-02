@@ -33,7 +33,7 @@ public abstract class ProgressBar {
 
     public void startInterval(ChaosMode chaosMode, IntegerOption interval) {
         runnable = getRunnable();
-        runnable.runTaskTimer(chaosMode, 0, 5);
+        runnable.runTaskTimer(chaosMode, 0, 1);
     }
 
     public void stopInterval() {

@@ -22,7 +22,6 @@ import java.util.List;
 public class TntDrop extends IntervalMode {
 
     private ChaosMode chaosMode;
-    private BossBar bossBar;
 
     public TntDrop(ChaosMode chaosMode) {
         super(chaosMode, "TNT Drop");
@@ -31,25 +30,9 @@ public class TntDrop extends IntervalMode {
         interval.setDefaultValue(600);
         setIcon(Material.TNT, ChatColor.RESET.toString() + getName(), "Click to change settings");
         this.setInterval(600);
-        BossBar bossBar = cooldownBar.getBar("TNT Drop", BarColor.RED, BarStyle.SOLID);
-        this.bossBar = bossBar;
     }
 
-    private ProgressBar cooldownBar = new ProgressBar(chaosMode) {
-        @Override
-        public BukkitRunnable getRunnable() {
-            return new BukkitRunnable() {
-                @Override
-                public void run() {
-                    if (bossBar.getProgress() < 1) {
-                        bossBar.setProgress(bossBar.getProgress() + (1 / interval.getValue()));
-                    } else {
-                        bossBar.setProgress(0);
-                    }
-                }
-            };
-        }
-    };
+
 
     @Override
     public void enable() {
@@ -58,14 +41,12 @@ public class TntDrop extends IntervalMode {
             bossBar.addPlayer(onlinePlayer);
         }
         bossBar.setVisible(true);
-        cooldownBar.startInterval(chaosMode, interval);
     }
 
     @Override
     public void disable() {
         super.disable();
         bossBar.setVisible(false);
-        cooldownBar.stopInterval();
     }
 
     @Override
