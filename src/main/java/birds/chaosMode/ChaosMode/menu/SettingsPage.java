@@ -160,7 +160,7 @@ public class SettingsPage extends InventoryPage {
                 if(((IntegerOption) option).getValue() + 20 <= ((IntegerOption) option).getMaximumValue())
                     contents[iterator + 6] = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "+20");
 
-                // on click: set to minimum value
+                // on click: set to maximum value
                 if(((IntegerOption) option).getMaximumValue() != Integer.MAX_VALUE)
                     contents[iterator + 8] = createGuiItem(Material.BLACK_STAINED_GLASS_PANE, ChatColor.RESET.toString() + "Set to Maximum Value");
             }

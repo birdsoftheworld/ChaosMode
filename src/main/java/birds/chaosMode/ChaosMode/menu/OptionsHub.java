@@ -9,8 +9,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+
 public class OptionsHub extends InventoryPage {
-    private Mode[] modes;
+    private ArrayList<Mode> modes;
     private int size;
 
     public OptionsHub(ChaosMode chaosMode) {
@@ -26,7 +28,7 @@ public class OptionsHub extends InventoryPage {
         switch(item.getType()) {
             case GREEN_STAINED_GLASS_PANE:
                 // disable corresponding mode if mode is enabled
-                modes[slot - 9].disable();
+                modes.get(slot - 9).disable();
                 setUpSlots();
                 // xp sound
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
@@ -35,7 +37,7 @@ public class OptionsHub extends InventoryPage {
 
             case RED_STAINED_GLASS_PANE:
                 // enable corresponding mode if mode is enabled
-                modes[slot - 9].enable();
+                modes.get(slot - 9).enable();
                 setUpSlots();
                 // xp sound
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
@@ -44,7 +46,7 @@ public class OptionsHub extends InventoryPage {
 
             default:
                 // otherwise, go into settings
-                Mode currentMode = modes[slot];
+                Mode currentMode = modes.get(slot);
 
                 SettingsPage settings = new SettingsPage(chaosMode, currentMode, this);
                 player.closeInventory();
@@ -56,7 +58,7 @@ public class OptionsHub extends InventoryPage {
     @Override
     public void setUpSlots() {
         // set size to 2 lines per 9 modes
-        int size = 18 * ((modes.length - 1) / 9 + 1);
+        int size = 18 * ((modes.size() - 1) / 9 + 1);
         this.size = size;
         page = Bukkit.createInventory(this, size, "Options");
         ItemStack[] items = new ItemStack[18];
@@ -78,12 +80,12 @@ public class OptionsHub extends InventoryPage {
                 toggleInterval += 9;
 
             // stop if no more modes
-            if(iterator >= modes.length)
+            if(iterator >= modes.size())
                 break;
 
             ItemStack toggleIcon;
             // find which icon to use
-            if(modes[iterator].isEnabled()) {
+            if(modes.get(iterator).isEnabled()) {
                 toggleIcon = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, "Click to Disable");
             } else {
                 toggleIcon = createGuiItem(Material.RED_STAINED_GLASS_PANE, "Click to Enable");
