@@ -27,8 +27,11 @@ public class EternalNight extends ListenerMode {
     @EventHandler
     public void onSkipTime(TimeSkipEvent event) {
         // don't let players skip to day
-        if(isEnabled())
-            event.setCancelled(true);
+        if(isEnabled()) {
+            // allow plugins to set time
+            if(!event.getSkipReason().equals(TimeSkipEvent.SkipReason.CUSTOM))
+                event.setCancelled(true);
+        }
     }
 
     @Override
