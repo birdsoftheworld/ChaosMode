@@ -15,22 +15,22 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PotionEffects extends IntervalMode {
     private Usables usables;
-    private BooleanOption includeWithering;
-    private IntegerOption potionDuration;
+    private BooleanOption includeWithering = new BooleanOption(false);;
+    private IntegerOption potionDuration = new IntegerOption(400, 1, Integer.MAX_VALUE);
 
     public PotionEffects(ChaosMode chaosMode, Usables usables) {
         super(chaosMode, "Potion Effects");
         this.usables = usables;
 
-        interval.setValue(40);
-        interval.setDefaultValue(40);
-        this.setInterval(40);
+        interval.setValue(800);
+        interval.setDefaultValue(800);
+        this.setInterval(800);
 
-        includeWithering = new BooleanOption(false);
         includeWithering.setIcon(Material.WITHER_SKELETON_SKULL, "Include Withering", "Include Withering");
+        addOption(includeWithering);
 
-        potionDuration = new IntegerOption(400, 1, Integer.MAX_VALUE);
         potionDuration.setIcon(Material.REDSTONE, "Potion Effect Duration", "Potion Effect Duration");
+        addOption(potionDuration);
 
         setIcon(Material.POTION, ChatColor.RESET.toString() + getName(), "Click to change settings");
     }
