@@ -26,10 +26,10 @@ public class PotionEffects extends IntervalMode {
         interval.setDefaultValue(800);
         this.setInterval(800);
 
-        includeWithering.setIcon(Material.WITHER_SKELETON_SKULL, "Include Withering", "Include Withering");
+        includeWithering.setIcon(Material.WITHER_SKELETON_SKULL, ChatColor.RESET.toString() + "Include Withering");
         addOption(includeWithering);
 
-        potionDuration.setIcon(Material.REDSTONE, "Potion Effect Duration", "Potion Effect Duration");
+        potionDuration.setIcon(Material.REDSTONE, ChatColor.RESET.toString() + "Potion Effect Duration");
         addOption(potionDuration);
 
         setIcon(Material.POTION, ChatColor.RESET.toString() + getName(), "Click to change settings");

@@ -27,13 +27,13 @@ public class Corruption extends IntervalMode {
         super(chaosMode, "Corruption");
         this.usables = usables;
 
-        radius.setIcon(Material.STONE, "Radius", "Radius");
+        radius.setIcon(Material.STONE, ChatColor.RESET.toString() + "Radius");
         addOption(radius);
 
-        entityChance.setIcon(Material.CREEPER_SPAWN_EGG, "Spawn Entities", "Spawn Entities");
+        entityChance.setIcon(Material.CREEPER_SPAWN_EGG, ChatColor.RESET.toString() + "Spawn Entities");
         addOption(entityChance);
 
-        biasTowardsSpecial.setIcon(Material.CHEST, "Bias towards Chests/Spawners", "Bias towards Chests/Spawners");
+        biasTowardsSpecial.setIcon(Material.CHEST, ChatColor.RESET.toString() + "Bias towards Chests/Spawners");
         addOption(biasTowardsSpecial);
 
         interval.setValue(40);
