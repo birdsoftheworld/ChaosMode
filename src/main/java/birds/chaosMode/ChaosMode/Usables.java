@@ -61,6 +61,7 @@ public class Usables {
             if(type.equals(EntityType.ENDER_SIGNAL)) continue;
             if(type.equals(EntityType.PAINTING)) continue;
             if(type.equals(EntityType.ITEM_FRAME)) continue;
+            if(type.equals(EntityType.RAVAGER)) continue;
             usableEntities.add(type);
         }
         Bukkit.getLogger().info("Discovered " + usableEntities.size() + " entities!");
