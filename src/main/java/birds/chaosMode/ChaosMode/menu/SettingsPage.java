@@ -48,7 +48,6 @@ public class SettingsPage extends InventoryPage {
                 selected = options.get((slot - 1) / 9);
                 if(selected instanceof IntegerOption) {
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 20);
-                    ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() - 1);
                 }
                 if(selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(false);
