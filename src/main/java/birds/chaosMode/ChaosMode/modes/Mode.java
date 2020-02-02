@@ -33,6 +33,8 @@ public abstract class Mode {
         this.enabled = false;
     }
 
+    public void update() {}
+
     public void setName(String name) {
         this.name = name;
     }

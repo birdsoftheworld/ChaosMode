@@ -20,6 +20,7 @@ public abstract class IntervalMode extends Mode {
         addOption(interval);
     }
 
+    @Override
     public void update() {
         if (runnable != null) {
             stopInterval();

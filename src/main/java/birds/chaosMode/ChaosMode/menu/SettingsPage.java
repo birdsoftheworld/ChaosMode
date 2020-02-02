@@ -123,8 +123,8 @@ public class SettingsPage extends InventoryPage {
             case IRON_INGOT:
                 player.closeInventory();
                 hub.showInventory(player);
-                if(mode instanceof IntervalMode)
-                    ((IntervalMode) mode).update();
+
+                mode.update();
                 break;
 
             default:
@@ -219,7 +219,6 @@ public class SettingsPage extends InventoryPage {
     public void onInventoryClose(InventoryCloseEvent event) {
         if(!event.getInventory().equals(page)) return;
 
-        if(mode instanceof IntervalMode)
-            ((IntervalMode) mode).update();
+         mode.update();
     }
 }
