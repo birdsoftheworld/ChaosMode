@@ -136,7 +136,6 @@ public class SettingsPage extends InventoryPage {
                 if (selected instanceof ItemListOption) {
                     ItemListPage listPage = new ItemListPage(chaosMode, (ItemListOption) selected, mode, this);
 
-                    player.closeInventory();
                     listPage.showInventory(player);
                     break;
                 }

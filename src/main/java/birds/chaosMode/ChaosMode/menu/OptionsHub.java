@@ -49,7 +49,6 @@ public class OptionsHub extends InventoryPage {
                 Mode currentMode = modes.get(slot);
 
                 SettingsPage settings = new SettingsPage(chaosMode, currentMode, this);
-                player.closeInventory();
                 settings.showInventory(player);
                 break;
         }

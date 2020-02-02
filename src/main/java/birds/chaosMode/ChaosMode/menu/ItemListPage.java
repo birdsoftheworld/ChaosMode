@@ -37,7 +37,6 @@ public class ItemListPage extends InventoryPage {
             // xp sound
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
             mode.update();
-            player.closeInventory();
             settingsPage.showInventory(player);
             return;
         }
