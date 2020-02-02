@@ -10,12 +10,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public abstract class ProgressBar {
 
-    private ProgressBar progressBar;
     private BukkitRunnable runnable;
-    private ChaosMode chaosMode;
 
-    protected ProgressBar(ChaosMode chaosMode) {
-        this.chaosMode = chaosMode;
+    protected ProgressBar() {
         runnable = null;
     }
 
@@ -25,7 +22,7 @@ public abstract class ProgressBar {
 
     public abstract BukkitRunnable getRunnable();
 
-    public void startInterval(ChaosMode chaosMode, IntegerOption interval) {
+    public void startInterval(ChaosMode chaosMode) {
         runnable = getRunnable();
         runnable.runTaskTimer(chaosMode, 0, 1);
     }

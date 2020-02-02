@@ -21,7 +21,7 @@ public abstract class IntervalMode extends Mode {
 
     public IntervalMode(ChaosMode chaosMode, String name) {
         super(name);
-        cooldownBar = new ProgressBar(chaosMode) {
+        cooldownBar = new ProgressBar() {
             @Override
             public BukkitRunnable getRunnable() {
                 return new BukkitRunnable() {
@@ -45,6 +45,7 @@ public abstract class IntervalMode extends Mode {
                     stopInterval();
                     startInterval();
                 }
+                bossBar.setProgress(0);
             }
         });
         this.chaosMode = chaosMode;
@@ -73,6 +74,7 @@ public abstract class IntervalMode extends Mode {
     }
 
     protected void setInterval(int value) {
+        bossBar.setProgress(0);
         this.interval.setValue(value);
         if (runnable != null) {
             stopInterval();
@@ -84,7 +86,7 @@ public abstract class IntervalMode extends Mode {
     public void enable() {
         super.enable();
         startInterval();
-        cooldownBar.startInterval(chaosMode, interval);
+        cooldownBar.startInterval(chaosMode);
     }
 
     @Override
