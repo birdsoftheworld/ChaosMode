@@ -61,7 +61,7 @@ public class SettingsPage extends InventoryPage {
 
                 // BooleanOption
                 if(selected instanceof BooleanOption)
-                    ((BooleanOption) selected).setValue(false);
+                    ((BooleanOption) selected).setValue(true);
 
                 // ItemListOption (or BlockListOption)
                 if(selected instanceof ItemListOption)
@@ -86,7 +86,7 @@ public class SettingsPage extends InventoryPage {
                 if (selected instanceof IntegerOption)
                     ((IntegerOption) selected).setValue(((IntegerOption) selected).getValue() + 1);
                 if(selected instanceof BooleanOption)
-                    ((BooleanOption) selected).setValue(true);
+                    ((BooleanOption) selected).setValue(false);
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -195,18 +195,18 @@ public class SettingsPage extends InventoryPage {
                     contents[iterator + 8] = createGuiItem(Material.BLACK_STAINED_GLASS_PANE, ChatColor.RESET.toString() + "Set to Maximum Value");
             }
             if(option instanceof BooleanOption) {
-                // on click: disable
-                if(((BooleanOption) option).getValue())
-                    contents[iterator + 3] = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "Disable");
+                // on click: enable
+                if(!((BooleanOption) option).getValue())
+                    contents[iterator + 3] = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "Disabled", "Click to enable!");
 
                 assert optionMeta != null;
                 ArrayList<String> lores = new ArrayList<>();
                 lores.add(Boolean.toString(((BooleanOption) option).getValue()));
                 optionMeta.setLore(lores);
 
-                // on click: enable
-                if(!((BooleanOption) option).getValue())
-                    contents[iterator + 5] = createGuiItem(Material.LIME_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "Enable");
+                // on click: disable
+                if(((BooleanOption) option).getValue())
+                    contents[iterator + 5] = createGuiItem(Material.LIME_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "Enabled", "Click to disable!");
 
             }
             if(option instanceof ItemListOption) {

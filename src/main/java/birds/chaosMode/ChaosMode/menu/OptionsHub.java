@@ -48,16 +48,28 @@ public class OptionsHub extends InventoryPage {
             case CHEST:
                 // save settings
                 chaosMode.saveConfig();
+
+                // reload UI
+                setUpSlots();
+                player.openInventory(page);
                 break;
 
             case ENDER_CHEST:
                 // load settings
                 chaosMode.loadConfig();
+
+                // reload UI
+                setUpSlots();
+                player.openInventory(page);
                 break;
 
             case ANVIL:
                 // reset settings
                 chaosMode.resetToDefaults();
+
+                // reload UI
+                setUpSlots();
+                player.openInventory(page);
                 break;
 
             default:
@@ -101,9 +113,9 @@ public class OptionsHub extends InventoryPage {
             ItemStack toggleIcon;
             // find which icon to use
             if(modes.get(iterator).isEnabled()) {
-                toggleIcon = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "Click to Disable");
+                toggleIcon = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "Enabled");
             } else {
-                toggleIcon = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "Click to Enable");
+                toggleIcon = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "Disabled");
             }
 
             items[toggleInterval] = toggleIcon;
