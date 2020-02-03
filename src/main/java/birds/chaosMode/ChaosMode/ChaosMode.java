@@ -57,6 +57,7 @@ public class ChaosMode extends JavaPlugin {
 
     private void createConfig() {
         configFile = new File(getDataFolder(), "savedsettings.yml");
+        // create a config if it doesn't already exist
         if (!configFile.exists()) {
             configFile.getParentFile().mkdirs();
             saveResource("savedsettings.yml", false);
@@ -71,6 +72,7 @@ public class ChaosMode extends JavaPlugin {
     }
 
     public void saveConfig() {
+        // save all options in a custom config file
         for(Mode mode : modes) {
             String name = mode.getInternalName() + ".";
             for(ConfigurableOption option : mode.getOptions()) {
@@ -81,6 +83,8 @@ public class ChaosMode extends JavaPlugin {
                 else if(option instanceof ItemListOption)
                     getCustomConfig().set(name + option.getName(), ((ItemListOption) option).getItems());
             }
+            getCustomConfig().set(name + "enabled", mode.isEnabled());
+            getCustomConfig().set("active", true);
         }
         try {
             getCustomConfig().save(configFile);
@@ -90,8 +94,19 @@ public class ChaosMode extends JavaPlugin {
     }
 
     public void loadConfig() {
+        // load previous options
+
+        // stop if not already saved
+        if(!getCustomConfig().getBoolean("active")) return;
+
         for(Mode mode : modes) {
             String name = mode.getInternalName() + ".";
+            // set modes to loaded state
+            if(getCustomConfig().getBoolean(name + "enabled"))
+                mode.enable();
+            else
+                mode.disable();
+
             for(ConfigurableOption option : mode.getOptions()) {
                 if (option instanceof IntegerOption)
                     ((IntegerOption) option).setValue(getCustomConfig().getInt(name + option.getName()));
@@ -100,6 +115,25 @@ public class ChaosMode extends JavaPlugin {
                 else if (option instanceof ItemListOption)
                     ((ItemListOption) option).setItems((List<Material>) getCustomConfig().getList(name + option.getName()));
             }
+
+            // make sure all values update
+            if(mode.isEnabled())
+                mode.update();
+        }
+    }
+
+    public void resetToDefaults() {
+        // reset all options to their default values
+        for(Mode mode : modes) {
+            for(ConfigurableOption option : mode.getOptions()) {
+                if (option instanceof IntegerOption)
+                    ((IntegerOption) option).setValue(((IntegerOption) option).getDefaultValue());
+                else if (option instanceof BooleanOption)
+                    ((BooleanOption) option).setValue(((BooleanOption) option).getDefaultValue());
+                else if (option instanceof ItemListOption)
+                    ((ItemListOption) option).setItems(new ArrayList<Material>());
+            }
+            mode.disable();
         }
     }
 }

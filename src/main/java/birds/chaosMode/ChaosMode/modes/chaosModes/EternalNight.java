@@ -13,7 +13,7 @@ public class EternalNight extends ListenerMode {
     private HashMap<World, Long> cachedTimes = new HashMap<>();
     private HashMap<World, Difficulty> cachedDifficulties = new HashMap<>();
 
-    private BooleanOption moreDifficult = new BooleanOption(true, "moreDifficult");
+    private BooleanOption moreDifficult = new BooleanOption(true, "more-difficult");
 
     public EternalNight(ChaosMode chaosMode) {
         super(chaosMode, "Eternal Night");
@@ -50,7 +50,8 @@ public class EternalNight extends ListenerMode {
         super.disable();
         for(World world : Bukkit.getWorlds()) {
             // restore to saved time
-            world.setTime(cachedTimes.get(world));
+            if(cachedTimes.containsKey(world))
+                world.setTime(cachedTimes.get(world));
             world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
         }
     }

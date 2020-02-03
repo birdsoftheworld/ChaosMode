@@ -15,8 +15,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PotionEffects extends IntervalMode {
     private Usables usables;
-    private BooleanOption includeWithering = new BooleanOption(false, "includeWithering");
-    private IntegerOption potionDuration = new IntegerOption(400, 1, Integer.MAX_VALUE, "effectDuration");
+    private BooleanOption includeWithering = new BooleanOption(false, "include-withering");
+    private IntegerOption potionDuration = new IntegerOption(400, 1, Integer.MAX_VALUE, "effect-duration");
 
     public PotionEffects(ChaosMode chaosMode, Usables usables) {
         super(chaosMode, "Potion Effects");

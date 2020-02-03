@@ -15,7 +15,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class BlockCollapse extends ListenerMode {
-    private BooleanOption followWhiteList = new BooleanOption(false, "followWhitelist");
+    private BooleanOption followWhiteList = new BooleanOption(false, "follow-whitelist");
     private BlockListOption blacklist = new BlockListOption("blacklist");
     private BlockListOption whitelist = new BlockListOption("whitelist");
 
@@ -32,7 +32,7 @@ public class BlockCollapse extends ListenerMode {
         whitelist.setIcon(Material.LIME_DYE, ChatColor.RESET + "Item Whitelist");
         addOption(whitelist);
 
-        setIcon(Material.GLASS, ChatColor.RESET.toString() + getName(), ChatColor.RESET.toString() + ChatColor.RED.toString() + ChatColor.BOLD.toString() + "WARNING: This mode can get very laggy. Use with caution.");
+        setIcon(Material.GLASS, ChatColor.RESET.toString() + getName(), ChatColor.RESET.toString() + ChatColor.RED.toString() + ChatColor.BOLD.toString() + "WARNING: This can get laggy.");
     }
 
     @EventHandler

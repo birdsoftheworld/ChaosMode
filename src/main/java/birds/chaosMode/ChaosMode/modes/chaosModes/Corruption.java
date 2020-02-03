@@ -18,8 +18,8 @@ import java.util.Random;
 
 public class Corruption extends IntervalMode {
     private IntegerOption radius = new IntegerOption(16, 1, Integer.MAX_VALUE, "radius");
-    private IntegerOption biasTowardsSpecial = new IntegerOption(4, 0, 100, "biasTowardsSpecialBlocks");
-    private IntegerOption entityChance = new IntegerOption(25, 0, 100, "EntityChance");
+    private IntegerOption biasTowardsSpecial = new IntegerOption(4, 0, 100, "bias-towards-special-blocks");
+    private IntegerOption entityChance = new IntegerOption(25, 0, 100, "entity-chance");
     private Random random = new Random();
     private Usables usables;
 
