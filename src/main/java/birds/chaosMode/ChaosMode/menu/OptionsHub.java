@@ -113,9 +113,9 @@ public class OptionsHub extends InventoryPage {
             ItemStack toggleIcon;
             // find which icon to use
             if(modes.get(iterator).isEnabled()) {
-                toggleIcon = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "Enabled");
+                toggleIcon = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "Enabled", "Click to disable!");
             } else {
-                toggleIcon = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "Disabled");
+                toggleIcon = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "Disabled", "Click to enable!");
             }
 
             items[toggleInterval] = toggleIcon;

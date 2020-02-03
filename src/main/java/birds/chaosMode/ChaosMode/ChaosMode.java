@@ -47,12 +47,6 @@ public class ChaosMode extends JavaPlugin {
         this.getCommand("chaos").setExecutor(new ChaosCommand(this)); // open menu hub
 
         createConfig();
-        loadConfig();
-    }
-
-    @Override
-    public void onDisable() {
-        saveConfig();
     }
 
     private void createConfig() {
@@ -73,6 +67,9 @@ public class ChaosMode extends JavaPlugin {
 
     public void saveConfig() {
         // save all options in a custom config file
+
+        getLogger().info("Saving config...");
+
         for(Mode mode : modes) {
             String name = mode.getInternalName() + ".";
             for(ConfigurableOption option : mode.getOptions()) {
@@ -96,15 +93,17 @@ public class ChaosMode extends JavaPlugin {
     public void loadConfig() {
         // load previous options
 
+        getLogger().info("Loading config...");
+
         // stop if not already saved
         if(!getCustomConfig().getBoolean("active")) return;
 
         for(Mode mode : modes) {
             String name = mode.getInternalName() + ".";
-            // set modes to loaded state
-            if(getCustomConfig().getBoolean(name + "enabled"))
+            // set modes to loaded state, but only if loaded state is different than current state
+            if(getCustomConfig().getBoolean(name + "enabled") && !mode.isEnabled())
                 mode.enable();
-            else
+            else if(mode.isEnabled())
                 mode.disable();
 
             for(ConfigurableOption option : mode.getOptions()) {
