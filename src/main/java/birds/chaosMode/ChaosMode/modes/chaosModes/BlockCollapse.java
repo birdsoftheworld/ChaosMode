@@ -11,7 +11,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPistonEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -53,13 +53,18 @@ public class BlockCollapse extends ListenerMode {
 
     private void doRecursiveFallingForBlock(Block block) {
         BlockFace[] neighbors = {BlockFace.SELF, BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN};
+
         float hardness = block.getBlockData().getMaterial().getHardness();
+
         if(block.isLiquid() || hardness >= 5 || hardness < 0) return;
-        if(blacklist.getItems().contains(block.getType())) return;
-        if(followWhiteList.getValue() && !whitelist.getItems().contains(block.getType())) return;
 
         for(BlockFace face : neighbors) {
             final Block selectedBlock = block.getRelative(face);
+
+            // ignore blacklisted or non-whitelisted blocks
+            if(blacklist.getItems().contains(selectedBlock.getType())) continue;
+            if(followWhiteList.getValue() && !whitelist.getItems().contains(selectedBlock.getType())) continue;
+
             // ignore passable blocks
             if(selectedBlock.isPassable()) continue;
 
@@ -85,6 +90,10 @@ public class BlockCollapse extends ListenerMode {
     }
 
     private void doFallLater(final Block block) {
+        // ignore blacklisted or non-whitelisted blocks
+        if(blacklist.getItems().contains(block.getType())) return;
+        if(followWhiteList.getValue() && !whitelist.getItems().contains(block.getType())) return;
+
         new BukkitRunnable() {
             @Override
             public void run() {
