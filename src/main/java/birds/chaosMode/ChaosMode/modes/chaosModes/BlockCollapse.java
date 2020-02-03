@@ -54,6 +54,8 @@ public class BlockCollapse extends ListenerMode {
     private void doRecursiveFallingForBlock(Block block) {
         BlockFace[] neighbors = {BlockFace.SELF, BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN};
         if(block.isLiquid() || block.getBlockData().getMaterial().getHardness() >= 5) return;
+        if(blacklist.getItems().contains(block.getType())) return;
+        if(followWhiteList.getValue() && !whitelist.getItems().contains(block.getType())) return;
 
         for(BlockFace face : neighbors) {
             final Block selectedBlock = block.getRelative(face);
