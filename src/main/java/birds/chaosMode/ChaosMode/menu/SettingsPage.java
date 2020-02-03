@@ -48,6 +48,7 @@ public class SettingsPage extends InventoryPage {
         switch(item.getType()) {
             case RED_STAINED_GLASS_PANE:
                 selected = options.get((slot - 1) / 9);
+                // IntegerOption
                 if(selected instanceof IntegerOption) {
                     IntegerOption integerSelected = (IntegerOption) selected;
                     if(isShift)
@@ -57,8 +58,15 @@ public class SettingsPage extends InventoryPage {
                     if(integerSelected.getValue() < integerSelected.getMinimumValue())
                         integerSelected.setValue(integerSelected.getMinimumValue());
                 }
+
+                // BooleanOption
                 if(selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(false);
+
+                // ItemListOption (or BlockListOption)
+                if(selected instanceof ItemListOption)
+                    ((ItemListOption) selected).setItems(new ArrayList<Material>());
+
                 // redisplay dialog
                 setUpSlots();
                 player.openInventory(page);
@@ -202,6 +210,7 @@ public class SettingsPage extends InventoryPage {
 
             }
             if(option instanceof ItemListOption) {
+                contents[iterator + 3] = createGuiItem(Material.RED_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.RED.toString() + "Reset");
                 assert optionMeta != null;
                 ArrayList<String> lores = new ArrayList<>();
                 lores.add("Click to configure item list!");
