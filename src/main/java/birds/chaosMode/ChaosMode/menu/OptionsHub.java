@@ -3,6 +3,7 @@ package birds.chaosMode.ChaosMode.menu;
 import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.Mode;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -44,6 +45,14 @@ public class OptionsHub extends InventoryPage {
                 player.openInventory(page);
                 break;
 
+            case CHEST:
+                chaosMode.saveConfig();
+                break;
+
+            case ENDER_CHEST:
+                chaosMode.loadConfig();
+                break;
+
             default:
                 // otherwise, go into settings
                 Mode currentMode = modes.get(slot);
@@ -57,10 +66,10 @@ public class OptionsHub extends InventoryPage {
     @Override
     public void setUpSlots() {
         // set size to 2 lines per 9 modes
-        int size = 18 * ((modes.size() - 1) / 9 + 1);
+        int size = 18 * ((modes.size() - 1) / 9 + 1) + 9;
         this.size = size;
         page = Bukkit.createInventory(this, size, "Options");
-        ItemStack[] items = new ItemStack[18];
+        ItemStack[] items = new ItemStack[size];
 
         int iterator = 0;
         // iterate through currently set modes and set their icon
@@ -94,6 +103,9 @@ public class OptionsHub extends InventoryPage {
 
             iterator++;
         }
+
+        items[size - 4] = createGuiItem(Material.CHEST, ChatColor.RESET.toString() + "Save");
+        items[size - 6] = createGuiItem(Material.ENDER_CHEST, ChatColor.RESET.toString() + "Load");
 
         page.setContents(items);
     }

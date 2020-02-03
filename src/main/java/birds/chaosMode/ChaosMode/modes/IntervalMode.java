@@ -8,7 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public abstract class IntervalMode extends Mode {
 
-    protected IntegerOption interval = new IntegerOption(20, 1, Integer.MAX_VALUE);
+    protected IntegerOption interval = new IntegerOption(20, 1, Integer.MAX_VALUE, "interval");
     private ChaosMode chaosMode;
     private BukkitRunnable runnable;
 

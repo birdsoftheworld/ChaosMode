@@ -17,14 +17,16 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Random;
 
 public class Corruption extends IntervalMode {
-    private IntegerOption radius = new IntegerOption(16, 1, Integer.MAX_VALUE);
-    private IntegerOption biasTowardsSpecial = new IntegerOption(4, 0, 100);
-    private IntegerOption entityChance = new IntegerOption(25, 0, 100);
+    private IntegerOption radius = new IntegerOption(16, 1, Integer.MAX_VALUE, "radius");
+    private IntegerOption biasTowardsSpecial = new IntegerOption(4, 0, 100, "biasTowardsSpecialBlocks");
+    private IntegerOption entityChance = new IntegerOption(25, 0, 100, "EntityChance");
     private Random random = new Random();
     private Usables usables;
 
     public Corruption(ChaosMode chaosMode, Usables usables) {
         super(chaosMode, "Corruption");
+        setInternalName("corruption");
+
         this.usables = usables;
 
         radius.setIcon(Material.STONE, ChatColor.RESET.toString() + "Radius");
@@ -38,6 +40,8 @@ public class Corruption extends IntervalMode {
 
         interval.setValue(40);
         interval.setDefaultValue(40);
+        interval.setName("interval");
+
         setIcon(Material.SPONGE, ChatColor.RESET.toString() + getName(), "Click to change settings");
         this.setInterval(40);
     }

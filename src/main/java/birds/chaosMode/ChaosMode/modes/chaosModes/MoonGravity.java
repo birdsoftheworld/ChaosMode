@@ -22,9 +22,10 @@ public class MoonGravity extends ListenerMode {
     private IntegerOption effectDuration;
 
     public MoonGravity(ChaosMode chaosMode) {
-        super(chaosMode, "MoonGravity");
+        super(chaosMode, "Moon Gravity");
+        setInternalName("moongravity");
 
-        effectDuration = new IntegerOption(20, 1, Integer.MAX_VALUE);
+        effectDuration = new IntegerOption(20, 1, Integer.MAX_VALUE, "effectDuration");
         effectDuration.setIcon(Material.POTION, ChatColor.RESET.toString() + "Potion Duration");
         addOption(effectDuration);
 

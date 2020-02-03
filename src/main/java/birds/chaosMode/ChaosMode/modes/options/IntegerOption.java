@@ -39,11 +39,12 @@ public class IntegerOption extends ConfigurableOption {
     private int defaultValue;
     private int value;
 
-    public IntegerOption(int defaultValue, int minimumValue, int maximumValue) {
+    public IntegerOption(int defaultValue, int minimumValue, int maximumValue, String name) {
         this.value = defaultValue;
         this.defaultValue = defaultValue;
         this.minimumValue = minimumValue;
         this.maximumValue = maximumValue;
+        this.name = name;
     }
 
     public IntegerOption() {}

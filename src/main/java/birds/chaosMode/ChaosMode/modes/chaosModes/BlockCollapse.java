@@ -11,17 +11,17 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class BlockCollapse extends ListenerMode {
-    private BooleanOption followWhiteList = new BooleanOption(false);
-    private BlockListOption blacklist = new BlockListOption();
-    private BlockListOption whitelist = new BlockListOption();
+    private BooleanOption followWhiteList = new BooleanOption(false, "followWhitelist");
+    private BlockListOption blacklist = new BlockListOption("blacklist");
+    private BlockListOption whitelist = new BlockListOption("whitelist");
 
     public BlockCollapse(ChaosMode chaosMode) {
         super(chaosMode, "Block Collapse");
+        setInternalName("blockcollapse");
 
         followWhiteList.setIcon(Material.WHITE_WOOL, ChatColor.RESET.toString() + "Follow Item Whitelist");
         addOption(followWhiteList);

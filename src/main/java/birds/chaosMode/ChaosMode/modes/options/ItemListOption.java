@@ -3,16 +3,20 @@ package birds.chaosMode.ChaosMode.modes.options;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemListOption extends ConfigurableOption {
+    ItemListOption(String name) {
+        this.name = name;
+    }
 
-    ArrayList<Material> items = new ArrayList<>();
+    List<Material> items = new ArrayList<>();
 
-    public ArrayList<Material> getItems() {
+    public List<Material> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<Material> items) {
+    public void setItems(List<Material> items) {
         this.items = items;
     }
 

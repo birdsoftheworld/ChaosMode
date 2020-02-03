@@ -1,7 +1,6 @@
 package birds.chaosMode.ChaosMode.menu;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
-import birds.chaosMode.ChaosMode.modes.IntervalMode;
 import birds.chaosMode.ChaosMode.modes.Mode;
 import birds.chaosMode.ChaosMode.modes.options.BooleanOption;
 import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
@@ -15,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 

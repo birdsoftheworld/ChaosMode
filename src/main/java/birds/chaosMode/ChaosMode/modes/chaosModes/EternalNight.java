@@ -13,10 +13,11 @@ public class EternalNight extends ListenerMode {
     private HashMap<World, Long> cachedTimes = new HashMap<>();
     private HashMap<World, Difficulty> cachedDifficulties = new HashMap<>();
 
-    private BooleanOption moreDifficult = new BooleanOption(true);
+    private BooleanOption moreDifficult = new BooleanOption(true, "moreDifficult");
 
     public EternalNight(ChaosMode chaosMode) {
         super(chaosMode, "Eternal Night");
+        setInternalName("eternalnight");
 
         moreDifficult.setIcon(Material.CREEPER_HEAD, ChatColor.RESET.toString() + "Harder Difficulty");
         addOption(moreDifficult);

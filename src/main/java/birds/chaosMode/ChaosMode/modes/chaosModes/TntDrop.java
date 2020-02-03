@@ -15,9 +15,14 @@ public class TntDrop extends IntervalMode {
 
     public TntDrop(ChaosMode chaosMode) {
         super(chaosMode, "TNT Drop");
+        setInternalName("tntdrop");
+
         this.chaosMode = chaosMode;
+
         interval.setValue(600);
         interval.setDefaultValue(600);
+        interval.setName("interval");
+
         setIcon(Material.TNT, ChatColor.RESET.toString() + getName(), "Click to change settings");
         this.setInterval(600);
     }

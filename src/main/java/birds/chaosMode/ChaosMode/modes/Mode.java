@@ -15,6 +15,7 @@ public abstract class Mode {
     private ItemStack icon;
     private boolean enabled;
     private String name;
+    private String internalName;
 
     Mode(String name) {
         this.enabled = false;
@@ -45,6 +46,14 @@ public abstract class Mode {
         } else {
             return "This mode doesn't have a name!";
         }
+    }
+
+    public void setInternalName(String name) {
+        this.internalName = name;
+    }
+
+    public String getInternalName() {
+        return internalName;
     }
 
     protected void setIcon(Material material, String name, String... lore) {

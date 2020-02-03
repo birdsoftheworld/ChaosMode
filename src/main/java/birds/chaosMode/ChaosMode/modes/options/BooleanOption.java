@@ -4,9 +4,10 @@ public class BooleanOption extends ConfigurableOption {
     private boolean value;
     private boolean defaultValue;
 
-    public BooleanOption(boolean defaultValue) {
+    public BooleanOption(boolean defaultValue, String name) {
         this.value = defaultValue;
         this.defaultValue = defaultValue;
+        this.name = name;
     }
 
     public BooleanOption() {}
