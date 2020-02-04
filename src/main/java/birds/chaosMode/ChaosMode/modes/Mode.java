@@ -9,14 +9,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Mode {
+public abstract class Mode {
 
     private ArrayList<ConfigurableOption> options = new ArrayList<>();
     private ItemStack icon;
     private boolean enabled;
     private String name;
+    private String internalName;
 
-    public Mode(String name) {
+    Mode(String name) {
         this.enabled = false;
         this.name = name;
     }
@@ -33,6 +34,8 @@ public class Mode {
         this.enabled = false;
     }
 
+    public void update() {}
+
     public void setName(String name) {
         this.name = name;
     }
@@ -45,7 +48,15 @@ public class Mode {
         }
     }
 
-    public void setIcon(Material material, String name, String... lore) {
+    public void setInternalName(String name) {
+        this.internalName = name;
+    }
+
+    public String getInternalName() {
+        return internalName;
+    }
+
+    protected void setIcon(Material material, String name, String... lore) {
         ItemStack item = new ItemStack(material, 1);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
@@ -63,7 +74,7 @@ public class Mode {
         return icon;
     }
 
-    public void addOption(ConfigurableOption option) {
+    protected void addOption(ConfigurableOption option) {
         options.add(option);
     }
 

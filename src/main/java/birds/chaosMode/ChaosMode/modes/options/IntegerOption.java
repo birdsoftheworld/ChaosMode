@@ -23,14 +23,7 @@ public class IntegerOption extends ConfigurableOption {
     }
 
     public void setValue(int value) {
-        if(isEvent)
-            changeEvent.change(this.value, value);
         this.value = value;
-    }
-
-    public void setChangeEvent(IntChangeEvent changeEvent) {
-        this.changeEvent = changeEvent;
-        isEvent = true;
     }
 
     public int getDefaultValue() {
@@ -45,14 +38,14 @@ public class IntegerOption extends ConfigurableOption {
     private int minimumValue;
     private int defaultValue;
     private int value;
-    private boolean isEvent;
 
-    private IntChangeEvent changeEvent;
-
-    public IntegerOption(int defaultValue, int minimumValue, int maximumValue) {
+    public IntegerOption(int defaultValue, int minimumValue, int maximumValue, String name) {
         this.value = defaultValue;
         this.defaultValue = defaultValue;
         this.minimumValue = minimumValue;
         this.maximumValue = maximumValue;
+        this.name = name;
     }
+
+    public IntegerOption() {}
 }

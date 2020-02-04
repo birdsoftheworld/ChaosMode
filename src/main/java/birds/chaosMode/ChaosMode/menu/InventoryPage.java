@@ -59,7 +59,7 @@ public abstract class InventoryPage implements InventoryHolder, Listener {
         assert meta != null;
         meta.setDisplayName(name);
 
-        ArrayList<String> metaLore = new ArrayList<String>(Arrays.asList(lore));
+        ArrayList<String> metaLore = new ArrayList<>(Arrays.asList(lore));
 
         meta.setLore(metaLore);
         item.setItemMeta(meta);

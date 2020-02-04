@@ -27,5 +27,14 @@ public abstract class ConfigurableOption {
         return icon;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private ItemStack icon;
+    String name;
 }

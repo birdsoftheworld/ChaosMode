@@ -2,9 +2,6 @@ package birds.chaosMode.ChaosMode.modes.chaosModes;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.IntervalMode;
-import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
-import birds.chaosMode.ChaosMode.modes.options.IntChangeEvent;
-import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -14,24 +11,20 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class TntDrop extends IntervalMode {
 
+    private ChaosMode chaosMode;
+
     public TntDrop(ChaosMode chaosMode) {
         super(chaosMode, "TNT Drop");
-        interval.setValue(40);
-        interval.setDefaultValue(40);
+        setInternalName("tntdrop");
+
+        this.chaosMode = chaosMode;
+
+        interval.setValue(600);
+        interval.setDefaultValue(600);
+        interval.setName("interval");
+
         setIcon(Material.TNT, ChatColor.RESET.toString() + getName(), "Click to change settings");
-        this.setInterval(40);
-    }
-
-    @Override
-    public void enable() {
-        super.enable();
-        startInterval();
-    }
-
-    @Override
-    public void disable() {
-        super.disable();
-        stopInterval();
+        this.setInterval(600);
     }
 
     @Override

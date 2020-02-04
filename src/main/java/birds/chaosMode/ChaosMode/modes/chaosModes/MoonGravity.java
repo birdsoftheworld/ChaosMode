@@ -5,10 +5,7 @@ import birds.chaosMode.ChaosMode.modes.IntervalMode;
 import birds.chaosMode.ChaosMode.modes.ListenerMode;
 import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Statistic;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -25,11 +22,14 @@ public class MoonGravity extends ListenerMode {
     private IntegerOption effectDuration;
 
     public MoonGravity(ChaosMode chaosMode) {
-        super(chaosMode, "MoonGravity");
-        effectDuration = new IntegerOption(20, 1, Integer.MAX_VALUE);
-        effectDuration.setIcon(Material.POTION, ChatColor.RESET.toString() + "Potion Duration", "Potion Duration");
-        setIcon(Material.SLIME_BLOCK, ChatColor.RESET.toString() + getName(), "Click to change settings");
+        super(chaosMode, "Moon Gravity");
+        setInternalName("moongravity");
+
+        effectDuration = new IntegerOption(20, 1, Integer.MAX_VALUE, "effect-duration");
+        effectDuration.setIcon(Material.POTION, ChatColor.RESET.toString() + "Potion Duration");
         addOption(effectDuration);
+
+        setIcon(Material.SLIME_BLOCK, ChatColor.RESET.toString() + getName(), "Click to change settings");
     }
 
 
@@ -58,6 +58,6 @@ public class MoonGravity extends ListenerMode {
 
         int duration = effectDuration.getValue();
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, duration, 1));
-        player.spawnParticle(Particle.CLOUD, player.getLocation(), 25);
+        player.spawnParticle(Particle.CLOUD, player.getLocation().subtract(0.0, 0.5, 0.0),25);
     }
 }
