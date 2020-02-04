@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 
 public class NeverStop extends IntervalMode {
 
-    private IntegerOption speed = new IntegerOption(15, 1, 100, "speed");
+    private IntegerOption speed = new IntegerOption(5, 1, 100, "speed");
 
     public NeverStop(ChaosMode chaosMode) {
         super(chaosMode, "Never Stop");
