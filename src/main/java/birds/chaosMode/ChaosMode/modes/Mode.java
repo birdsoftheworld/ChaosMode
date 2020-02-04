@@ -78,6 +78,10 @@ public abstract class Mode {
         options.add(option);
     }
 
+    protected void removeOption(ConfigurableOption option) {
+        options.remove(option);
+    }
+
     public ArrayList<ConfigurableOption> getOptions() {
         return options;
     }
