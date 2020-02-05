@@ -1,33 +1,33 @@
 package birds.chaosMode.ChaosMode.modes.chaosModes;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
-import birds.chaosMode.ChaosMode.modes.IntervalMode;
 import birds.chaosMode.ChaosMode.modes.ListenerMode;
-import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
+import birds.chaosMode.ChaosMode.modes.options.BooleanOption;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerStatisticIncrementEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class MoonGravity extends ListenerMode {
 
-    private IntegerOption effectDuration;
+    private IntegerOption effectDuration = new IntegerOption(20, 1, Integer.MAX_VALUE, "effect-duration");
+    private BooleanOption disableSlowFall = new BooleanOption(false, "disable-slowfall");
 
     public MoonGravity(ChaosMode chaosMode) {
         super(chaosMode, "Moon Gravity");
         setInternalName("moongravity");
 
-        effectDuration = new IntegerOption(20, 1, Integer.MAX_VALUE, "effect-duration");
         effectDuration.setIcon(Material.POTION, ChatColor.RESET.toString() + "Potion Duration");
         addOption(effectDuration);
+
+        disableSlowFall.setIcon(Material.SAND, ChatColor.RESET.toString() + "Disable Slow Falling");
+        addOption(disableSlowFall);
 
         setIcon(Material.SLIME_BLOCK, ChatColor.RESET.toString() + getName(), "Click to change settings");
     }
@@ -40,7 +40,7 @@ public class MoonGravity extends ListenerMode {
         Player player = event.getPlayer();
 
         // if new position is lower than current position, then apply slow falling
-        if (Objects.requireNonNull(event.getTo()).getBlockY() < event.getFrom().getBlockY()) {
+        if (Objects.requireNonNull(event.getTo()).getBlockY() < event.getFrom().getBlockY() && !disableSlowFall.getValue()) {
             int duration = effectDuration.getValue();
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, duration, 0));
         }
