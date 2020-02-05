@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 
 public class NeverStop extends IntervalMode {
 
-    private IntegerOption speed = new IntegerOption(60, 1, 100, "speed");
+    private IntegerOption speed = new IntegerOption(30, 1, 100, "speed");
 
     public NeverStop(ChaosMode chaosMode) {
         super(chaosMode, "Never Stop");
@@ -26,7 +26,7 @@ public class NeverStop extends IntervalMode {
         this.setInterval(1);
         removeOption(interval);
 
-        setIcon(Material.SUGAR, ChatColor.RESET.toString() + getName());
+        setIcon(Material.SUGAR, ChatColor.RESET.toString() + getName(), "Click to change settings!");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class NeverStop extends IntervalMode {
                     Vector facingDirection = onlinePlayer.getEyeLocation().getDirection();
 
                     // speed level
-                    double speedValue = (double) speed.getValue() / 400.0;
+                    double speedValue = (double) speed.getValue() / 200.0;
 
                     // player's facing direction, normalized, stripped of its y-value, and multiplied by speed
                     Vector adjustedDirection;
