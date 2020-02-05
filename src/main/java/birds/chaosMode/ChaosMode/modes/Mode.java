@@ -7,7 +7,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public abstract class Mode {
 
@@ -62,7 +61,7 @@ public abstract class Mode {
         assert meta != null;
         meta.setDisplayName(name);
 
-        ArrayList<String> metaLore = new ArrayList<String>(Arrays.asList(lore));
+        ArrayList<String> metaLore = new ArrayList<>(Arrays.asList(lore));
 
         meta.setLore(metaLore);
         item.setItemMeta(meta);

@@ -9,6 +9,7 @@ public class BlockListOption extends ItemListOption {
 
     @Override
     public boolean itemIsAcceptable(Material item) {
+        // only accept non-duplicated blocks
         return item.isBlock() && !items.contains(item);
     }
 }

@@ -11,13 +11,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class TntDrop extends IntervalMode {
 
-    private ChaosMode chaosMode;
-
     public TntDrop(ChaosMode chaosMode) {
         super(chaosMode, "TNT Drop");
         setInternalName("tntdrop");
-
-        this.chaosMode = chaosMode;
 
         interval.setValue(600);
         interval.setDefaultValue(600);

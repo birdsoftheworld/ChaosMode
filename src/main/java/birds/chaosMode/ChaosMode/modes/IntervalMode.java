@@ -14,10 +14,12 @@ public abstract class IntervalMode extends Mode {
 
     public IntervalMode(ChaosMode chaosMode, String name) {
         super(name);
-        interval.setIcon(Material.CLOCK, ChatColor.RESET.toString() + "Interval (ticks)");
         this.chaosMode = chaosMode;
-        runnable = null;
+
+        interval.setIcon(Material.CLOCK, ChatColor.RESET.toString() + "Interval (ticks)");
         addOption(interval);
+
+        runnable = null;
     }
 
     @Override

@@ -47,24 +47,24 @@ public class Usables {
     private void discoverEntities() {
         Bukkit.getLogger().info("Starting entity discovery...");
         usableEntities = new ArrayList<>();
-        // get all entities
+        // get usable entities
         for(EntityType type : EntityType.values()) {
             // don't include weird types or bosses
-            if(type.equals(EntityType.PLAYER)) continue;
-            if(type.equals(EntityType.UNKNOWN)) continue;
-            if(type.equals(EntityType.AREA_EFFECT_CLOUD)) continue;
-            if(type.equals(EntityType.SPLASH_POTION)) continue;
-            if(type.equals(EntityType.DROPPED_ITEM)) continue;
-            if(type.equals(EntityType.FALLING_BLOCK)) continue;
-            if(type.equals(EntityType.WITHER)) continue;
-            if(type.equals(EntityType.ENDER_DRAGON)) continue;
-            if(type.equals(EntityType.ENDER_PEARL)) continue;
-            if(type.equals(EntityType.FISHING_HOOK)) continue;
-            if(type.equals(EntityType.LEASH_HITCH)) continue;
-            if(type.equals(EntityType.ENDER_SIGNAL)) continue;
-            if(type.equals(EntityType.PAINTING)) continue;
-            if(type.equals(EntityType.ITEM_FRAME)) continue;
-            if(type.equals(EntityType.RAVAGER)) continue;
+            if (type.equals(EntityType.PLAYER)) continue;
+            if (type.equals(EntityType.UNKNOWN)) continue;
+            if (type.equals(EntityType.AREA_EFFECT_CLOUD)) continue;
+            if (type.equals(EntityType.SPLASH_POTION)) continue;
+            if (type.equals(EntityType.DROPPED_ITEM)) continue;
+            if (type.equals(EntityType.FALLING_BLOCK)) continue;
+            if (type.equals(EntityType.WITHER)) continue;
+            if (type.equals(EntityType.ENDER_DRAGON)) continue;
+            if (type.equals(EntityType.ENDER_PEARL)) continue;
+            if (type.equals(EntityType.FISHING_HOOK)) continue;
+            if (type.equals(EntityType.LEASH_HITCH)) continue;
+            if (type.equals(EntityType.ENDER_SIGNAL)) continue;
+            if (type.equals(EntityType.PAINTING)) continue;
+            if (type.equals(EntityType.ITEM_FRAME)) continue;
+            if (type.equals(EntityType.RAVAGER)) continue;
             usableEntities.add(type);
         }
         Bukkit.getLogger().info("Discovered " + usableEntities.size() + " entities!");
@@ -81,6 +81,7 @@ public class Usables {
     private void discoverPotionEffects() {
         Bukkit.getLogger().info("Starting effect discovery...");
         usablePotionEffects = new ArrayList<>();
+
         // get all effects
         for(PotionEffectType effect : PotionEffectType.values()) {
             // don't include instant potion effects, which do weird things when applied for a long time

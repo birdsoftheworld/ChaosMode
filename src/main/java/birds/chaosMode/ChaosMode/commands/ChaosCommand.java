@@ -22,7 +22,8 @@ public class ChaosCommand implements CommandExecutor {
             return true;
         }
 
-        hub.showInventory((Player) commandSender); // show the options GUI
+        // show the options GUI
+        hub.showInventory((Player) commandSender);
         return true;
     }
 }
