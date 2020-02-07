@@ -41,7 +41,7 @@ public class ChaosMode extends JavaPlugin {
         modes.add(new TntDrop(this));
         modes.add(new Corruption(this, usables));
         modes.add(new PotionEffects(this, usables));
-        modes.add(new EternalNight(this));
+        modes.add(new HardMode(this));
         modes.add(new BlockCollapse(this));
         modes.add(new NeverStop(this));
 
