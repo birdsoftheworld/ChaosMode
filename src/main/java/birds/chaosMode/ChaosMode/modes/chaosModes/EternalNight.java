@@ -4,9 +4,17 @@ import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.ListenerMode;
 import birds.chaosMode.ChaosMode.modes.options.BooleanOption;
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.world.TimeSkipEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class EternalNight extends ListenerMode {
@@ -14,6 +22,7 @@ public class EternalNight extends ListenerMode {
     private HashMap<World, Difficulty> cachedDifficulties = new HashMap<>();
 
     private BooleanOption moreDifficult = new BooleanOption(true, "more-difficult");
+    private BooleanOption mobEffects = new BooleanOption(false, "mob-effects");
 
     public EternalNight(ChaosMode chaosMode) {
         super(chaosMode, "Eternal Night");
@@ -22,7 +31,27 @@ public class EternalNight extends ListenerMode {
         moreDifficult.setIcon(Material.CREEPER_HEAD, ChatColor.RESET.toString() + "Harder Difficulty");
         addOption(moreDifficult);
 
+        mobEffects.setIcon(Material.POTION, ChatColor.RESET.toString() + "Mob Effects");
+        addOption(mobEffects);
+
         setIcon(Material.DAYLIGHT_DETECTOR, ChatColor.RESET.toString() + getName(), "Click to change settings");
+    }
+
+    private void applyEffect(Entity entity) {
+        // give an entity a random positive effect
+
+        // return if entity can't have effects
+        if(!(entity instanceof LivingEntity)) return;
+
+        ArrayList<PotionEffectType> effects = new ArrayList<>();
+        effects.add(PotionEffectType.DAMAGE_RESISTANCE);
+        effects.add(PotionEffectType.SPEED);
+        effects.add(PotionEffectType.INCREASE_DAMAGE);
+        effects.add(PotionEffectType.HEALTH_BOOST);
+        effects.add(PotionEffectType.INVISIBILITY);
+        Collections.shuffle(effects);
+
+        ((LivingEntity) entity).addPotionEffect(new PotionEffect(effects.get(0), Integer.MAX_VALUE, 0));
     }
 
     @EventHandler
@@ -35,6 +64,23 @@ public class EternalNight extends ListenerMode {
         }
     }
 
+    @EventHandler
+    public void onMobSpawn(EntitySpawnEvent event) {
+        // stop if mode is disabled
+        if(!isEnabled()) return;
+
+        // stop if option is disabled
+        if(!(mobEffects.getValue())) return;
+
+        Entity entity = event.getEntity();
+
+        // stop if entity isn't a monster
+        if(!(entity instanceof Monster)) return;
+
+        // finally, apply an effect
+        applyEffect(entity);
+    }
+
     @Override
     public void update() {
         for(World world : Bukkit.getWorlds()) {
@@ -42,6 +88,15 @@ public class EternalNight extends ListenerMode {
                 world.setDifficulty(Difficulty.HARD);
             else
                 world.setDifficulty(cachedDifficulties.get(world));
+
+            // apply effects to all monsters
+            if(mobEffects.getValue()) {
+                for(Entity entity : world.getEntities()) {
+                    if(entity instanceof Monster) {
+                        applyEffect(entity);
+                    }
+                }
+            }
         }
     }
 
@@ -70,6 +125,15 @@ public class EternalNight extends ListenerMode {
             if(moreDifficult.getValue())
                 world.setDifficulty(Difficulty.HARD);
             world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+
+            // apply effects to all monsters
+            if(mobEffects.getValue()) {
+                for(Entity entity : world.getEntities()) {
+                    if(entity instanceof Monster) {
+                        applyEffect(entity);
+                    }
+                }
+            }
         }
     }
 }
