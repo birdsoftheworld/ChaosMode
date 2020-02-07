@@ -10,4 +10,3 @@ commands:
   chaos:
     usage: /chaos
     permission: chaos.chaos
-    permission-message: You are not allowed to do that.

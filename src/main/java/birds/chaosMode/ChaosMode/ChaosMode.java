@@ -50,6 +50,13 @@ public class ChaosMode extends JavaPlugin {
         createConfig();
     }
 
+    @Override
+    public void onDisable() {
+        for(Mode mode : modes) {
+            mode.disable();
+        }
+    }
+
     private void createConfig() {
         configFile = new File(getDataFolder(), "savedsettings.yml");
         // create a config if it doesn't already exist
