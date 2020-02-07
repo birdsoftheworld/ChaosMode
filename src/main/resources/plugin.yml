@@ -2,6 +2,12 @@ name: ChaosMode
 version: 1.3.0
 main: birds.chaosMode.ChaosMode.ChaosMode
 api-version: "1.13"
+permissions:
+  chaos.chaos:
+    description: Allows you to change Chaos settings
+    default: op
 commands:
   chaos:
     usage: /chaos
+    permission: chaos.chaos
+    permission-message: You are not allowed to do that.
