@@ -46,7 +46,7 @@ public class HardMode extends ListenerMode {
         effectLevel.setIcon(Material.EXPERIENCE_BOTTLE, ChatColor.RESET.toString() + "Max Effect Level");
         addOption(effectLevel);
 
-        setIcon(Material.IRON_SWORD, ChatColor.RESET.toString() + getName(), "Click to change settings");
+        setIcon(Material.IRON_SWORD, ChatColor.RESET.toString() + getName(), ChatColor.RESET.toString() + ChatColor.GRAY.toString() + "Check options for functionality.");
     }
 
     private void applyEffect(Entity entity) {
