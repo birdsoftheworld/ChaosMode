@@ -84,7 +84,7 @@ public class BlockCollapse extends IntervalMode implements Listener {
             final Block selectedBlock = block.getRelative(face);
 
             // ignore blacklisted or non-whitelisted blocks
-            if(blacklist.getItems().contains(selectedBlock.getType())) continue;
+            if(blacklist.getBlocks().contains(selectedBlock.getType())) continue;
 
             // ignore passable blocks
             if(selectedBlock.isPassable()) continue;
@@ -112,7 +112,7 @@ public class BlockCollapse extends IntervalMode implements Listener {
 
     private void doFallLater(final Block block, final int blockNumber, final int delay) {
         // ignore blacklisted or non-whitelisted blocks
-        if(blacklist.getItems().contains(block.getType())) return;
+        if(blacklist.getBlocks().contains(block.getType())) return;
 
         new BukkitRunnable() {
             @Override

@@ -40,7 +40,7 @@ public class Corruption extends IntervalMode {
         biasTowardsSpecial.setIcon(Material.CHEST, ChatColor.RESET.toString() + "Bias towards Chests/Spawners");
         addOption(biasTowardsSpecial);
 
-        replaceExisting.setIcon(Material.ANVIL, ChatColor.RESET.toString() + "Only replace existing blocks", ChatColor.BOLD.toString() + "This may slow down block placements.");
+        replaceExisting.setIcon(Material.ANVIL, ChatColor.RESET.toString() + "Only replace existing blocks", "This slows things down.");
         addOption(replaceExisting);
 
         interval.setValue(40);

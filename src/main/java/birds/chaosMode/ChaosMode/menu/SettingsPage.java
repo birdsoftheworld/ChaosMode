@@ -63,9 +63,9 @@ public class SettingsPage extends InventoryPage {
                 if(selected instanceof BooleanOption)
                     ((BooleanOption) selected).setValue(true);
 
-                // ItemListOption (or BlockListOption)
+                // ItemListOption
                 if(selected instanceof ItemListOption)
-                    ((ItemListOption) selected).setItems(new ArrayList<Material>());
+                    ((ItemListOption) selected).setItems(((ItemListOption) selected).getDefaultItems());
 
                 // redisplay dialog
                 setUpSlots();
@@ -216,6 +216,7 @@ public class SettingsPage extends InventoryPage {
                 lores.add("Click to configure item list!");
                 optionMeta.setLore(lores);
             }
+
             optionIcon.setItemMeta(optionMeta);
             contents[iterator + 4] = optionIcon;
 

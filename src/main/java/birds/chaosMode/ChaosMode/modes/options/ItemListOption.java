@@ -11,6 +11,8 @@ public class ItemListOption extends ConfigurableOption {
     }
 
     List<Material> items = new ArrayList<>();
+    private List<Material> defaultItems = new ArrayList<>();
+    int maxItems = 54;
 
     public List<Material> getItems() {
         return items;
@@ -28,8 +30,20 @@ public class ItemListOption extends ConfigurableOption {
         this.items.remove(item);
     }
 
+    public void setMaxItems(int maxItems) {
+        this.maxItems = maxItems;
+    }
+
+    public void setDefaultItems(List<Material> defaultItems) {
+        this.defaultItems = defaultItems;
+    }
+
+    public List<Material> getDefaultItems() {
+        return defaultItems;
+    }
+
     public boolean itemIsAcceptable(Material item) {
         // return true unless duplicate
-        return !items.contains(item);
+        return !items.contains(item) && items.size() + 1 <= maxItems;
     }
 }
