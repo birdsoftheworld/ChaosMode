@@ -45,6 +45,7 @@ public class ChaosMode extends JavaPlugin {
         modes.add(new BlockCollapse(this));
         modes.add(new NeverStop(this));
         modes.add(new DisappearingBlock(this));
+        modes.add(new InventoryKerfuffle(this));
 
         this.getCommand("chaos").setExecutor(new ChaosCommand(this)); // open menu hub
 

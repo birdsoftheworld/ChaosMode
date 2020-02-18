@@ -32,8 +32,6 @@ public class MoonGravity extends ListenerMode {
         setIcon(Material.SLIME_BLOCK, ChatColor.RESET.toString() + getName(), "Click to change settings");
     }
 
-
-
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         if(!isEnabled()) return;
