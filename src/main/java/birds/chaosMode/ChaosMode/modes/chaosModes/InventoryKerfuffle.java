@@ -29,7 +29,7 @@ public class InventoryKerfuffle extends ListenerMode {
         chance.setIcon(Material.GLASS, ChatColor.RESET.toString() + "Chance");
         addOption(chance);
 
-        setIcon(Material.GUNPOWDER, ChatColor.RESET.toString() + getName());
+        setIcon(Material.GUNPOWDER, ChatColor.RESET.toString() + getName(), "Click to change settings!");
     }
 
     @EventHandler

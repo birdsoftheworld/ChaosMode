@@ -29,7 +29,9 @@ public class BlockCollapse extends IntervalMode implements Listener {
 
     public BlockCollapse(ChaosMode chaosMode) {
         super(chaosMode, "Block Collapse");
+
         chaosMode.getServer().getPluginManager().registerEvents(this, chaosMode);
+
         this.chaosMode = chaosMode;
         setInternalName("blockcollapse");
 

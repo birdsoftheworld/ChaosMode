@@ -23,7 +23,7 @@ public class DisappearingBlock extends IntervalMode {
     public DisappearingBlock(ChaosMode chaosMode) {
         super(chaosMode, "Disappearing Blocks");
         setInternalName("disappearing-blocks");
-        setIcon(Material.BUCKET, ChatColor.RESET.toString() + getName());
+        setIcon(Material.BUCKET, ChatColor.RESET.toString() + getName(), "Click to change settings!");
 
         blacklist.setIcon(Material.BARRIER, ChatColor.RESET + "Block Blacklist");
         Material[] defaultBlacklist = {Material.OBSIDIAN, Material.NETHER_PORTAL, Material.END_PORTAL,
