@@ -36,7 +36,9 @@ public class TntDrop extends IntervalMode {
             public void run() {
                 for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                     // spawn tnt on the player
-                    onlinePlayer.getWorld().spawnEntity(onlinePlayer.getLocation(), entity.getEntities().get(0));
+                    if(entity.getEntities().size() >= 1) {
+                        onlinePlayer.getWorld().spawnEntity(onlinePlayer.getLocation(), entity.getEntities().get(0));
+                    }
                 }
             }
         };
