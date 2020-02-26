@@ -26,10 +26,18 @@ public class OptionsHub extends InventoryPage {
     public void runSlotAction(int slot, ItemStack item, Player player, ClickType click) {
         if(slot >= size) return;
 
+        int column = 0;
+        int row = 0;
+        int chosenMode = 0;
+        int inventoryWidth = 9;
+
         switch(item.getType()) {
             case GREEN_STAINED_GLASS_PANE:
                 // disable corresponding mode if mode is enabled
-                modes.get(slot - 9).disable();
+                column = slot % inventoryWidth;
+                row = (slot - column) / inventoryWidth;
+                chosenMode = (row * inventoryWidth - inventoryWidth) / 2 + column;
+                modes.get(chosenMode).disable();
                 setUpSlots();
                 // xp sound
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
@@ -38,7 +46,10 @@ public class OptionsHub extends InventoryPage {
 
             case RED_STAINED_GLASS_PANE:
                 // enable corresponding mode if mode is enabled
-                modes.get(slot - 9).enable();
+                column = slot % inventoryWidth;
+                row = (slot - column) / inventoryWidth;
+                chosenMode = (row * inventoryWidth - inventoryWidth) / 2 + column;
+                modes.get(chosenMode).enable();
                 setUpSlots();
                 // xp sound
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
@@ -74,7 +85,9 @@ public class OptionsHub extends InventoryPage {
 
             default:
                 // otherwise, go into settings
-                Mode currentMode = modes.get(slot);
+                column = slot % inventoryWidth;
+                chosenMode = (slot - column) / 2 + column;
+                Mode currentMode = modes.get(chosenMode);
 
                 SettingsPage settings = new SettingsPage(chaosMode, currentMode, this);
                 settings.showInventory(player);
