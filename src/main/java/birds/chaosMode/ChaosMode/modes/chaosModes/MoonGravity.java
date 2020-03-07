@@ -18,6 +18,7 @@ public class MoonGravity extends ListenerMode {
 
     private IntegerOption effectDuration = new IntegerOption(20, 1, Integer.MAX_VALUE, "effect-duration");
     private BooleanOption disableSlowFall = new BooleanOption(false, "disable-slowfall");
+    private IntegerOption effectStrength = new IntegerOption(1, 1, Integer.MAX_VALUE, "effect-strength");
 
     public MoonGravity(ChaosMode chaosMode) {
         super(chaosMode, "Moon Gravity");
@@ -28,6 +29,9 @@ public class MoonGravity extends ListenerMode {
 
         disableSlowFall.setIcon(Material.SAND, ChatColor.RESET.toString() + "Disable Slow Falling");
         addOption(disableSlowFall);
+
+        effectStrength.setIcon(Material.OBSIDIAN, ChatColor.RESET.toString() + "Potion Strength");
+        addOption(effectStrength);
 
         setIcon(Material.SLIME_BLOCK, ChatColor.RESET.toString() + getName(), "Click to change settings");
     }
@@ -55,7 +59,7 @@ public class MoonGravity extends ListenerMode {
         }
 
         int duration = effectDuration.getValue();
-        player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, duration, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, duration, effectStrength.getValue()));
         player.spawnParticle(Particle.CLOUD, player.getLocation().subtract(0.0, 0.5, 0.0),25);
     }
 }

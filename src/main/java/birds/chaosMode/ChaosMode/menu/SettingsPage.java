@@ -188,7 +188,7 @@ public class SettingsPage extends InventoryPage {
 
                 // on click: add 20
                 if(((IntegerOption) option).getValue() + 20 <= ((IntegerOption) option).getMaximumValue())
-                    contents[iterator + 6] = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "+20", "Hold shift to subtract 100");
+                    contents[iterator + 6] = createGuiItem(Material.GREEN_STAINED_GLASS_PANE, ChatColor.RESET.toString() + ChatColor.GREEN.toString() + "+20", "Hold shift to add 100");
 
                 // on click: set to maximum value
                 if(((IntegerOption) option).getMaximumValue() != Integer.MAX_VALUE)

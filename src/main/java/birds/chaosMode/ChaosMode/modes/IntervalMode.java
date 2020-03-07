@@ -4,6 +4,7 @@ import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public abstract class IntervalMode extends Mode {

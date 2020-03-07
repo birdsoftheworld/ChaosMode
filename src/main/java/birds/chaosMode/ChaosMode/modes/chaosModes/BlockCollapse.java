@@ -95,7 +95,7 @@ public class BlockCollapse extends IntervalMode implements Listener {
             if(selectedBlock.isLiquid()) continue;
 
             // ignore hard blocks
-            if(selectedBlock.getBlockData().getMaterial().getHardness() >= 5) continue;
+            if(selectedBlock.getBlockData().getMaterial().getHardness() >= 5 || selectedBlock.getBlockData().getMaterial().getHardness() < 0) continue;
 
             // only fall if block below is empty
             if(!selectedBlock.getRelative(BlockFace.DOWN).isEmpty()) continue;

@@ -2,6 +2,7 @@ package birds.chaosMode.ChaosMode.modes;
 
 import birds.chaosMode.ChaosMode.modes.options.ConfigurableOption;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 

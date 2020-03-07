@@ -2,6 +2,7 @@ package birds.chaosMode.ChaosMode.modes.chaosModes;
 
 import birds.chaosMode.ChaosMode.ChaosMode;
 import birds.chaosMode.ChaosMode.modes.IntervalMode;
+import birds.chaosMode.ChaosMode.modes.options.BooleanOption;
 import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,6 +14,7 @@ import org.bukkit.util.Vector;
 public class NeverStop extends IntervalMode {
 
     private IntegerOption speed = new IntegerOption(30, 1, 100, "speed");
+    private BooleanOption nullifyY = new BooleanOption(true, "normalize-y");
 
     public NeverStop(ChaosMode chaosMode) {
         super(chaosMode, "Never Stop");
@@ -20,6 +22,9 @@ public class NeverStop extends IntervalMode {
 
         speed.setIcon(Material.SUGAR, ChatColor.RESET.toString() + "Speed");
         addOption(speed);
+
+        nullifyY.setIcon(Material.ENDER_EYE, ChatColor.RESET.toString() + "Disregard Y Direction");
+        addOption(nullifyY);
 
         interval.setValue(1);
         interval.setDefaultValue(1);
@@ -47,9 +52,9 @@ public class NeverStop extends IntervalMode {
                     // player's facing direction, normalized, stripped of its y-value, and multiplied by speed
                     Vector adjustedDirection;
                     if(onlinePlayer.isOnGround())
-                        adjustedDirection = facingDirection.normalize().setY(0).multiply(speedValue);
+                        adjustedDirection = facingDirection.normalize().setY(nullifyY.getValue() ? 0 : facingDirection.getY()).multiply(speedValue);
                     else
-                        adjustedDirection = facingDirection.normalize().setY(0).multiply(speedValue / 4);
+                        adjustedDirection = facingDirection.normalize().setY(nullifyY.getValue() ? 0 : facingDirection.getY()).multiply(speedValue / 4);
 
                     // set player's velocity to facing direction * speed + current velocity
                     onlinePlayer.setVelocity(playerVelocity.add(adjustedDirection));
