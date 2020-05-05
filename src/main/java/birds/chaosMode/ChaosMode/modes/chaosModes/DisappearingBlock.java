@@ -11,14 +11,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class DisappearingBlock extends IntervalMode {
 
     private BlockListOption blacklist = new BlockListOption("blacklist");
     private BlockListOption blockToSet = new BlockListOption("blocks-list");
     private BooleanOption onLookAway = new BooleanOption(false, "on-look-away");
+    private BooleanOption randomBlocks = new BooleanOption(false, "random-blocks");
 
     public DisappearingBlock(ChaosMode chaosMode) {
         super(chaosMode, "Disappearing Blocks");
@@ -38,6 +38,9 @@ public class DisappearingBlock extends IntervalMode {
         onLookAway.setIcon(Material.ENDER_EYE, ChatColor.RESET.toString() + "Change on Look Away");
         addOption(onLookAway);
 
+        randomBlocks.setIcon(Material.SPONGE, ChatColor.RESET.toString() + "Create Random Block");
+        addOption(randomBlocks);
+
         interval.setValue(20);
         interval.setDefaultValue(20);
     }
@@ -52,8 +55,13 @@ public class DisappearingBlock extends IntervalMode {
 
                 // set type of block to set
                 Material type = Material.AIR;
-                if(blockToSet.getBlocks().size() > 0)
+                if(blockToSet.getBlocks().size() > 0) {
                     type = blockToSet.getBlocks().get(0);
+                } else if (randomBlocks.getValue()) {
+                    List<Material> materialList = Arrays.asList(Material.values());
+                    int index = new Random().nextInt(materialList.size());
+                    type = materialList.get(index);
+                }
 
                 for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                     // player's look direction

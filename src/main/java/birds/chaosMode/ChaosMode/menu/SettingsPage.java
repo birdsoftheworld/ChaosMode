@@ -158,7 +158,7 @@ public class SettingsPage extends InventoryPage {
         // create a new inventory with 1 line per setting
         size = 9 * options.size() + 9;
         page = Bukkit.createInventory(this, size, mode.getName() + " Settings");
-        ItemStack[] contents = new ItemStack[9 * options.size() + 9];
+        ItemStack[] contents = new ItemStack[size];
 
         int iterator = 0;
         for(ConfigurableOption option : options) {

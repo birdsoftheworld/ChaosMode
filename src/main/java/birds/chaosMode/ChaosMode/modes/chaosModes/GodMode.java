@@ -62,6 +62,7 @@ public class GodMode extends ListenerMode {
     public void disable() {
         super.disable();
         Player god = getGodPlayer();
+        if (god == null) return;
         god.setInvulnerable(false);
         god.setFlying(false);
         god.setAllowFlight(false);
