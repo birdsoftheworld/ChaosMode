@@ -83,6 +83,11 @@ public class OptionsHub extends InventoryPage {
                 player.openInventory(page);
                 break;
 
+            case BARRIER:
+                ExcludedPlayerMenu excludedPlayerMenu = new ExcludedPlayerMenu(chaosMode);
+                excludedPlayerMenu.showInventory(player);
+                break;
+
             default:
                 // otherwise, go into settings
                 column = slot % inventoryWidth;
@@ -139,6 +144,7 @@ public class OptionsHub extends InventoryPage {
         items[size - 4] = createGuiItem(Material.CHEST, ChatColor.RESET.toString() + "Save");
         items[size - 5] = createGuiItem(Material.ANVIL, ChatColor.RESET.toString() + "Reset All");
         items[size - 6] = createGuiItem(Material.ENDER_CHEST, ChatColor.RESET.toString() + "Load");
+        items[size - 1] = createGuiItem(Material.BARRIER, ChatColor.RED + "Exclude Players");
 
         page.setContents(items);
     }

@@ -61,9 +61,10 @@ public class Corruption extends IntervalMode {
             @Override
             public void run() {
                 for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-
                     // ignore players if they're somehow null
                     if(onlinePlayer == null) continue;
+
+                    if (ChaosMode.playerIsExcluded(onlinePlayer)) return;
 
                     // get their location
                     Location location = onlinePlayer.getLocation();

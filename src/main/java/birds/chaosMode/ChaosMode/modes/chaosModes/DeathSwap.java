@@ -50,6 +50,7 @@ public class DeathSwap extends IntervalMode {
             public void run() {
                 ArrayList<Player> players = new ArrayList<>();
                 for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                    if (ChaosMode.playerIsExcluded(onlinePlayer)) return;
                     players.add(onlinePlayer);
                 }
                 if (players.size() < 2) return;

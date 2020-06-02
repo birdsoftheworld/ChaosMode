@@ -40,6 +40,7 @@ public class NeverStop extends IntervalMode {
             @Override
             public void run() {
                 for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                    if (ChaosMode.playerIsExcluded(onlinePlayer)) continue;
                     // player's current speed
                     Vector playerVelocity = onlinePlayer.getVelocity();
 

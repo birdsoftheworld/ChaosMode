@@ -6,6 +6,7 @@ import birds.chaosMode.ChaosMode.modes.options.IntegerOption;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.Inventory;
@@ -43,6 +44,10 @@ public class InventoryKerfuffle extends ListenerMode {
         // note that monsters with an inventory have inventories implemented differently, so this mostly affects players
         if(!(entity instanceof InventoryHolder))
             return;
+
+        if (entity instanceof Player) {
+            if (ChaosMode.playerIsExcluded((Player) entity)) return;
+        }
 
         // return if chance check fails
         if(random.nextInt(101) > chance.getValue())

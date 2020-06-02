@@ -47,6 +47,7 @@ public class FishMode extends IntervalMode {
     public void enable() {
         super.enable();
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            if (ChaosMode.playerIsExcluded(onlinePlayer)) return;
             Entity fish = onlinePlayer.getWorld().spawnEntity(onlinePlayer.getLocation(), entity.getEntities().get(0));
             fish.setCustomName(onlinePlayer.getName());
             fish.setInvulnerable(true);
@@ -70,6 +71,7 @@ public class FishMode extends IntervalMode {
             public void run() {
                 if (!isEnabled()) return;
                 for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                    if (ChaosMode.playerIsExcluded(onlinePlayer)) return;
                     Block playerBlock = onlinePlayer.getWorld().getBlockAt(onlinePlayer.getEyeLocation());
                     if (playerBlock.getType() == Material.WATER || playerBlock.getBlockData() instanceof Waterlogged) {
                         onlinePlayer.addPotionEffect(new PotionEffect(PotionEffectType.CONDUIT_POWER, 600, 255));

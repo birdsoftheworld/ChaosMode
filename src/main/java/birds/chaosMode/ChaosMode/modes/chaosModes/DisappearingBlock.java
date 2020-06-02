@@ -64,6 +64,7 @@ public class DisappearingBlock extends IntervalMode {
                 }
 
                 for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                    if (ChaosMode.playerIsExcluded(onlinePlayer)) return;
                     // player's look direction
                     Vector playerFacing = onlinePlayer.getEyeLocation().getDirection();
 

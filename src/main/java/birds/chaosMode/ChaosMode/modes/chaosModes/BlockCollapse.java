@@ -60,6 +60,7 @@ public class BlockCollapse extends IntervalMode implements Listener {
     @EventHandler
     public void onDestroyBlock(BlockBreakEvent event) {
         if(!isEnabled()) return;
+        if (ChaosMode.playerIsExcluded(event.getPlayer())) return;
         if(!(collapseWhenInteracted.getValue())) return;
 
         Block block = event.getBlock();
@@ -69,6 +70,7 @@ public class BlockCollapse extends IntervalMode implements Listener {
     @EventHandler
     public void onPlaceBlock(BlockPlaceEvent event) {
         if(!isEnabled()) return;
+        if (ChaosMode.playerIsExcluded(event.getPlayer())) return;
         if(!(collapseWhenInteracted.getValue())) return;
 
         Block block = event.getBlock();
@@ -133,6 +135,7 @@ public class BlockCollapse extends IntervalMode implements Listener {
             public void run() {
                 if(!(collapseUnderPlayers.getValue())) return;
                 for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                    if (ChaosMode.playerIsExcluded(onlinePlayer)) return;
                     Location location = onlinePlayer.getLocation();
                     location.setY(location.getY() - 1);
                     Block block = location.getBlock();

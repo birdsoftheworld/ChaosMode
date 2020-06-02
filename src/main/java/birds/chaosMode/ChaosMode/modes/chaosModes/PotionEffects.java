@@ -44,6 +44,7 @@ public class PotionEffects extends IntervalMode {
             @Override
             public void run() {
                 for(Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                    if (ChaosMode.playerIsExcluded(onlinePlayer)) continue;
                     PotionEffectType effect = usables.getUsablePotionEffect();
 
                     // don't allow withering if includeWithering is false

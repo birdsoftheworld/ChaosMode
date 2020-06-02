@@ -18,8 +18,24 @@ public class ItemListOption extends ConfigurableOption {
         return items;
     }
 
+    public List<String> getItemNames() {
+        List<String> itemNames = new ArrayList<>();
+        items.forEach(item -> {
+            itemNames.add(item.name());
+        });
+
+        return itemNames;
+    }
+
     public void setItems(List<Material> items) {
         this.items = items;
+    }
+
+    public void setItemsByName(List<String> items) {
+        this.items.clear();
+        items.forEach(item -> {
+            addItem(Material.getMaterial(item));
+        });
     }
 
     public void addItem(Material item) {

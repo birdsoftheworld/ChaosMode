@@ -12,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -24,6 +25,7 @@ public class ChaosMode extends JavaPlugin {
     public ArrayList<Mode> getModes() {
         return modes;
     }
+    private static List<String> excludedPlayers = new ArrayList<>();
 
     private FileConfiguration getCustomConfig() {
         return this.config;
@@ -53,6 +55,14 @@ public class ChaosMode extends JavaPlugin {
         this.getCommand("chaos").setExecutor(new ChaosCommand(this)); // open menu hub
 
         createConfig();
+//
+//        List<String> excludedPlayers = (List<String>) getCustomConfig().getList("config.excludedPlayers");
+//
+//        if (excludedPlayers != null) {
+//            setExcludedPlayers(excludedPlayers);
+//        }
+
+        loadConfig();
     }
 
     @Override
@@ -60,6 +70,8 @@ public class ChaosMode extends JavaPlugin {
         for(Mode mode : modes) {
             mode.disable();
         }
+
+        saveConfig();
     }
 
     private void createConfig() {
@@ -91,11 +103,14 @@ public class ChaosMode extends JavaPlugin {
                 else if(option instanceof BooleanOption)
                     getCustomConfig().set(name + option.getName(), ((BooleanOption) option).getValue());
                 else if(option instanceof ItemListOption)
-                    getCustomConfig().set(name + option.getName(), ((ItemListOption) option).getItems());
+                    getCustomConfig().set(name + option.getName(), ((ItemListOption) option).getItemNames());
             }
             getCustomConfig().set(name + "enabled", mode.isEnabled());
             getCustomConfig().set("active", true);
         }
+
+        getCustomConfig().set("config.excludedPlayers", getExcludedPlayers());
+
         try {
             getCustomConfig().save(configFile);
         } catch (IOException e) {
@@ -125,13 +140,15 @@ public class ChaosMode extends JavaPlugin {
                 else if (option instanceof BooleanOption)
                     ((BooleanOption) option).setValue(getCustomConfig().getBoolean(name + option.getName()));
                 else if (option instanceof ItemListOption)
-                    ((ItemListOption) option).setItems((List<Material>) getCustomConfig().getList(name + option.getName()));
+                    ((ItemListOption) option).setItemsByName((List<String>) getCustomConfig().getList(name + option.getName()));
             }
 
             // make sure all values update
             if(mode.isEnabled())
                 mode.update();
         }
+
+        setExcludedPlayers((List<String>) getCustomConfig().getList("config.excludedPlayers"));
     }
 
     public void resetToDefaults() {
@@ -143,9 +160,29 @@ public class ChaosMode extends JavaPlugin {
                 else if (option instanceof BooleanOption)
                     ((BooleanOption) option).setValue(((BooleanOption) option).getDefaultValue());
                 else if (option instanceof ItemListOption)
-                    ((ItemListOption) option).setItems(new ArrayList<Material>());
+                    ((ItemListOption) option).setItems(new ArrayList<>());
             }
             mode.disable();
         }
+    }
+
+    public static List<String> getExcludedPlayers() {
+        return excludedPlayers;
+    }
+
+    public static void setExcludedPlayers(List<String> excludedPlayers) {
+        ChaosMode.excludedPlayers = excludedPlayers;
+    }
+
+    public static void excludePlayer(Player player) {
+        getExcludedPlayers().add(player.getUniqueId().toString());
+    }
+
+    public static void includePlayer(Player player) {
+        getExcludedPlayers().remove(player.getUniqueId().toString());
+    }
+
+    public static boolean playerIsExcluded(Player player) {
+        return getExcludedPlayers().contains(player.getUniqueId().toString());
     }
 }

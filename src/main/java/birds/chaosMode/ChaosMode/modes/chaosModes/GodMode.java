@@ -54,6 +54,7 @@ public class GodMode extends ListenerMode {
     public void enable() {
         super.enable();
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            if (ChaosMode.playerIsExcluded(onlinePlayer)) return;
             onlinePlayer.getInventory().setItem(0, new ItemStack(Material.NETHER_STAR));
         }
     }
@@ -83,6 +84,7 @@ public class GodMode extends ListenerMode {
         if (!isEnabled()) return;
         Action eventAction = event.getAction();
         Player eventPlayer = event.getPlayer();
+        if (ChaosMode.playerIsExcluded(eventPlayer)) return;
         if (eventAction == Action.LEFT_CLICK_AIR || eventAction == Action.LEFT_CLICK_BLOCK) {
             switch (eventPlayer.getInventory().getItemInMainHand().getType()) {
                 case STICK:

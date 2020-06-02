@@ -40,6 +40,7 @@ public class MoonGravity extends ListenerMode {
     public void onPlayerMove(PlayerMoveEvent event) {
         if(!isEnabled()) return;
         Player player = event.getPlayer();
+        if (ChaosMode.playerIsExcluded(player)) return;
 
         // if new position is lower than current position, then apply slow falling
         if (Objects.requireNonNull(event.getTo()).getBlockY() < event.getFrom().getBlockY() && !disableSlowFall.getValue()) {
@@ -52,6 +53,7 @@ public class MoonGravity extends ListenerMode {
     public void onJump(PlayerStatisticIncrementEvent event) {
         if (!isEnabled()) return;
         Player player = event.getPlayer();
+        if (ChaosMode.playerIsExcluded(player)) return;
 
         // only continue if action is a jump
         if (!(event.getStatistic().equals(Statistic.JUMP))) {
