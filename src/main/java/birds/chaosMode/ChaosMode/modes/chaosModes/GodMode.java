@@ -36,6 +36,7 @@ public class GodMode extends ListenerMode {
 
     public GodMode(ChaosMode chaosMode) {
         super(chaosMode, "God Mode");
+        setInternalName("godmode");
         this.chaosMode = chaosMode;
 
         doRemoveBlocks.setIcon(Material.ENDER_PEARL, "Remove Blocks", "Allow the god player to remove blocks.");

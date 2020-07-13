@@ -27,12 +27,14 @@ public abstract class Mode {
     }
 
     public void enable() {
-        this.enabled = true;
+        setEnabled(true);
     }
 
     public void disable() {
-        this.enabled = false;
+        setEnabled(false);
     }
+
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
 
     public void update() {}
 

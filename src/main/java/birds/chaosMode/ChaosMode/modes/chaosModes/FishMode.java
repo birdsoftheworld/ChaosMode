@@ -26,6 +26,7 @@ public class FishMode extends IntervalMode {
 
     public FishMode(ChaosMode chaosMode) {
         super(chaosMode, "Fish Mode");
+        setInternalName("fishmode");
         this.chaosMode = chaosMode;
 
         interval.setDefaultValue(1);
